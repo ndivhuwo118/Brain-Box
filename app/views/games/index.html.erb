@@ -1,0 +1,4 @@
+<% @games.each do |game| %>
+  <%= "#{game.game_players.first.user.email} #{game.game_players.first.score}  - #{game.game_players.second.score} #{game.game_players.second.user.email}"  %>
+  <hr>
+<% end %>
