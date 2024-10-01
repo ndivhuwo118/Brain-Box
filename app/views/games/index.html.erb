@@ -1,10 +1,4 @@
-<% @games.each do |game|%>
-<p>Game-id: <%= game.id %>
-</p>
-<% game.categories.each do |category| %>
-<p><%= category.name %></p>
-<% end %>
-<% game.game_players.each do |player| %>
-<p><%= player.score %></p>
-<% end %>
+<% @games.each do |game| %>
+  <%= "#{game.game_players.first.user.email} #{game.game_players.first.score}  - #{game.game_players.second.score} #{game.game_players.second.user.email}"  %>
+  <hr>
 <% end %>

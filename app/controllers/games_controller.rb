@@ -1,8 +1,12 @@
 class GamesController < ApplicationController
- before_action :set_game, only: [:show, :create]
+  before_action :set_game, only: [:show, :create]
 
   def index
-    @games = Game.all
+    @games = []
+    @game_players = GamePlayer.where(user_id: current_user.id)
+    @game_players.each do |game_player|
+      @games << game_player.game
+    end
   end
 
   def show
