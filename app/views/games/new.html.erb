@@ -1,0 +1,29 @@
+<h1>Create New Game</h1>
+
+<%= simple_form_for @game do |f| %>
+  <% if @game.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+      <ul>
+        <% @game.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.input :user_id, collection: @users, label: "Game Creator", prompt: "Select a creator" %>
+  </div>
+
+  <div class="field">
+    <%= f.input :category_ids, collection: @categories, as: :check_boxes, label: "Select Categories" %>
+  </div>
+
+  <div class="actions">
+    <%= f.button :submit, "Create Game" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to games', games_path %>

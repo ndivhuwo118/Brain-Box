@@ -1,0 +1,10 @@
+<% @games.each do |game|%>
+<p>Game-id: <%= game.id %>
+</p>
+<% game.categories.each do |category| %>
+<p><%= category.name %></p>
+<% end %>
+<% game.game_players.each do |player| %>
+<p><%= player.score %></p>
+<% end %>
+<% end %>
