@@ -1,0 +1,17 @@
+<h1>Create New Game</h1>
+
+<%= simple_form_for(@game) do |f| %>
+  <div class="field">
+    <%= f.input :user_id, collection: @users, label: "Challenger", prompt: "Select an Opp" %>
+  </div>
+
+  <div class="field">
+    <%= f.input :category_ids, collection: @categories, as: :check_boxes, label: "Select Categories" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to games', games_path %>
