@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :create]
+  before_action :set_game, only: [:show]
 
   def index
     @games = []
@@ -15,15 +15,30 @@ class GamesController < ApplicationController
   end
 
   def new
-    @game = Game.new
     @categories = Category.all
-    @users = User.all
+    @users = []
+    User.all.each do |user|
+      if user != current_user
+        @users << user.email
+      end
+    end
+    @game = Game.new
   end
 
   def create
     @game = Game.new(game_params)
-    @game.save
-    redirect_to game_path(@game)
+    @game.user = current_user
+
+    # raise
+    if @game.save
+      @gp = GamePlayer.new(game: @game, user: current_user)
+      @gp.save
+      @gp = GamePlayer.new(game: @game, user: User.find_by(email: game_params[:user_id]))
+      @gp.save
+      redirect_to @game
+    else
+      render :new
+    end
   end
 
   private
@@ -33,6 +48,6 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:user_id, :winner_id)
+    params.require(:game).permit(:user_id, category_ids: [])
   end
 end
