@@ -2,15 +2,15 @@
 
 # Clear existing data to ensure a fresh start
 puts "Clearing existing data..."
-User.destroy_all
-Category.destroy_all
-Game.destroy_all
-Round.destroy_all
-Question.destroy_all
-Answer.destroy_all
-GamePlayer.destroy_all
 GameCategory.destroy_all
+Category.destroy_all
+Answer.destroy_all
+Question.destroy_all
+Round.destroy_all
+GamePlayer.destroy_all
+Game.destroy_all
 PlayersAnswer.destroy_all
+User.destroy_all
 
 # Create sample users
 puts "Creating users..."
@@ -20,8 +20,14 @@ user_emails = [
   "ndi@gmail.com"
 ]
 
-user_emails.each do |email|
-  User.create!(email: email, password: "password123")
+user_nicknames = [
+  "jr",
+  "darian",
+  "ndivo"
+]
+
+user_emails.each_with_index do |email, index|
+  User.create!(email: email, password: "password123", nickname: user_nicknames[index])
 end
 
 # Create sample categories

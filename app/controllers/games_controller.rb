@@ -28,12 +28,13 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     @game.user = current_user
+    @opponent = User.find_by(email: game_params[:user_id])
 
     # raise
     if @game.save
       @gp = GamePlayer.new(game: @game, user: current_user)
       @gp.save
-      @gp = GamePlayer.new(game: @game, user: User.find_by(email: game_params[:user_id]))
+      @gp = GamePlayer.new(game: @game, user: @opponent)
       @gp.save
       redirect_to @game
     else
