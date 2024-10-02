@@ -7,5 +7,4 @@ class User < ApplicationRecord
   has_many :game
   has_many :game_players
   has_many :player_answers
-  
 end
