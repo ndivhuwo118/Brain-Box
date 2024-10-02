@@ -41,6 +41,12 @@ class GamesController < ApplicationController
     end
   end
 
+  def play
+    @game = Game.find(params[:id])
+    @game.start_round!
+    redirect_to game_round_path(@game, @game.current_round), notice: "Game has started!"
+  end
+
   private
 
   def set_game
