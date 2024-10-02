@@ -3,13 +3,13 @@
     <div class="game-card">
       <div class="game-info">
         <div class="player">
-          <span class="player-email"><%= game.game_players.first.user.email %></span>
+          <span class="player-email"><%= game.game_players.first.user.nickname %></span>
           <span class="player-score"><%= game.game_players.first.score %></span>
         </div>
         <span class="vs">VS</span>
         <div class="player">
           <span class="player-score"><%= game.game_players.second.score %></span>
-          <span class="player-email"><%= game.game_players.second.user.email %></span>
+          <span class="player-email"><%= game.game_players.second.user.nickname %></span>
         </div>
       </div>
       <hr class="divider">

@@ -1,93 +1,13 @@
-body {
-  background-color: #f0f4f8;
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 20px;
-}
+// Graphical variables
+@import "config/fonts";
+@import "config/colors";
+@import "config/bootstrap_variables";
 
-.game-list {
-  max-width: 600px;
-  margin: 0 auto;
-}
+// External libraries
+@import "bootstrap";
+@import "font-awesome";
 
-.game-card {
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 15px;
-  background: linear-gradient(135deg, #4a90e2, #50e3c2);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.game-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.game-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.player {
-  display: flex;
-  align-items: center;
-}
-
-.player-email {
-  font-weight: bold;
-  color: #ffffff;
-  margin-right: 10px;
-}
-
-.player-score {
-  font-size: 1.5em;
-  color: #ffffff;
-  margin-right: 10px;
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-.vs {
-  font-size: 2em;
-  color: #ffffff;
-  margin: 0 15px;
-}
-
-.divider {
-  border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  margin: 10px 0;
-}
-
-.new-game {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.button {
-  background-color: #e94e77;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 1.2em;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.button:hover {
-  background-color: #d6396b;
-  transform: scale(1.05);
-}
-
-.avatar{
-
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover;
- 
-}
+// Your CSS partials
+@import "components/index";
+@import "pages/index";
+@import "games/index";

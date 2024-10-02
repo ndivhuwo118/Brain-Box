@@ -20,8 +20,14 @@ user_emails = [
   "ndi@gmail.com"
 ]
 
-user_emails.each do |email|
-  User.create!(email: email, password: "password123")
+user_nicknames = [
+  "jr",
+  "darian",
+  "ndivo"
+]
+
+user_emails.each_with_index do |email, index|
+  User.create!(email: email, password: "password123", nickname: user_nicknames[index])
 end
 
 # Create sample categories
