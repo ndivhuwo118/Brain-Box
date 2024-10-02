@@ -1,6 +1,20 @@
-<h1><%= @round.round_number  %></h1>
+<h1>Round <%= @round.round_number %> for Game <%= @game.id %></h1>
+
 <% if @question %>
-<p>Question: <%= @question.content %></p>
-<% else  %>
-<p>No questions yet.</p>
+  <p>Question: <%= @question.content %></p>
+
+  <%= form_with url: game_round_question_path(@game, @round, @question), method: :post do %>
+    <ul>
+      <% @question.answers.each do |answer| %>
+        <li>
+          <%= radio_button_tag 'answer_id', answer.id %>
+          <%= label_tag "answer_id_#{answer.id}", answer.content %>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= submit_tag 'Submit Question', class: 'btn btn-primary' %>
+  <% end %>
+<% else %>
+  <p>No questions available for this round yet.</p>
 <% end %>
