@@ -1,19 +1,38 @@
 <div class="game-list">
   <% @games.each do |game| %>
-    <div class="game-card">
-      <div class="game-info">
-        <div class="player">
-          <span class="player-email"><%= game.game_players.first.user.nickname %></span>
-          <span class="player-score"><%= game.game_players.first.score %></span>
-        </div>
-        <span class="vs">VS</span>
-        <div class="player">
-          <span class="player-score"><%= game.game_players.second.score %></span>
-          <span class="player-email"><%= game.game_players.second.user.nickname %></span>
+    <%if game.game_players.first.score == 0 && game.game_players.second.score == 0%>
+      <div class="game-card">
+        <div class="game-info">
+          <div class="player">
+              <span class="player-email"><%= game.game_players.first.user.nickname %></span>
+              <span class="player-score"><%= game.game_players.first.score %></span>
+            </div>
+            <span class="vs"><button type="button" class="btn btn-primary">Play Now</button></span>
+            <div class="player">
+              <span class="player-score"><%= game.game_players.second.score %></span>
+              <span class="player-email"><%= game.game_players.second.user.nickname %></span>
+          </div>
         </div>
       </div>
-      <hr class="divider">
-    </div>
+    <% end %>
+  <% end %>
+  <hr>
+  <% @games.each do |game| %>
+    <%if game.game_players.first.score > 0 || game.game_players.second.score > 0%>
+      <div class="game-card">
+        <div class="game-info">
+          <div class="player">
+              <span class="player-email"><%= game.game_players.first.user.nickname %></span>
+              <span class="player-score"><%= game.game_players.first.score %></span>
+            </div>
+            <span class="vs">VS</span>
+            <div class="player">
+              <span class="player-score"><%= game.game_players.second.score %></span>
+              <span class="player-email"><%= game.game_players.second.user.nickname %></span>
+          </div>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
 
