@@ -7,6 +7,7 @@
   </div>
 
   <div class="field">
+
     <%= f.input :category_ids, collection: @categories, as: :check_boxes, label: "Select Categories" %>
   </div>
 
@@ -37,7 +38,7 @@
           if (data.length) {
             data.forEach(user => {
               const userDiv = document.createElement('div');
-              userDiv.textContent = user.name; 
+              userDiv.textContent = user.name;
               userDiv.onclick = function() {
                 searchInput.value = user.name;
                 resultsDiv.style.display = 'none';

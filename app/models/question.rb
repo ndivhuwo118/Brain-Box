@@ -1,8 +1,7 @@
 class Question < ApplicationRecord
-  after_create :set_content
+  after_save :content
   belongs_to :round
   has_many :answers
-
 
   def content
     if super.blank?
@@ -16,6 +15,8 @@ class Question < ApplicationRecord
 
   def set_content
     categories = round.game.categories
+    p categories
+
     client = OpenAI::Client.new
     chatgpt_response = client.chat(parameters: {
       model: "gpt-4o-mini",
