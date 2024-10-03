@@ -1,5 +1,5 @@
 class Round < ApplicationRecord
-  after_create :set_question
+  after_save :set_question
   belongs_to :game
   has_one :question
 

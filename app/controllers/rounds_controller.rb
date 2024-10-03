@@ -10,20 +10,13 @@ class RoundsController < ApplicationController
     #   @game_player = @game.game_players.find_by(user: current_user)
     # end
     # next_round = Round.where('id > ?', @round.id).first
-    next_round = @game.rounds.where(round_number: @round.round_number + 1).last
+    @next_round = @game.rounds.find_by(round_number: @round.round_number + 1)
 
-    next_question = .question
-    next_question = @round.question.where('id > ?', @question.id).first
-
-    if next_question
-      redirect_to game_round_question_path(@game, @round, next_question)
-    else
-      if next_round
-        redirect_to game_round_question_path(@game, next_round, next_round.question)
-      else
-        redirect_to game_over_path(@game)
-      end
-    end
+    # if next_round
+    #   redirect_to game_round_path(@game, next_round)
+    # else
+    #   redirect_to games_path
+    # end
   end
 
   def create

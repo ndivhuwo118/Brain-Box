@@ -17,18 +17,14 @@ Rails.application.routes.draw do
     member do
       post :play
     end
+
     resources :rounds, only: [:show, :create] do
-      resources :questions, only: [:show] do
-        member do
-          post :answer
-        end
-        resources :answers, only: [:create]
-          member do
-            post :select
-          end
-      end
+      resources :questions, only: [:show]
     end
+    resources :users, only: [:show]
+    resources :questions, only: [:show] do
+      resources :answers, only: [:create]
+    end
+
   end
-  resources :users, only: [:show]
-  resources :questions, only: [:show]
 end

@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  after_create :set_rounds
+  after_save :set_rounds
   belongs_to :user
   belongs_to :opponent, class_name: 'User'
 
