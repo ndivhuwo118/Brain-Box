@@ -15,6 +15,15 @@
   </div>
 <% end %>
 
+<div class="navbar">
+    <a href="#games" class="navbar-icon">
+        <i class="fas fa-gamepad"></i> Games
+    </a>
+    <a href="#messages" class="navbar-icon">
+        <i class="fa-solid fa-message"></i> Messages
+    </a>
+</div>
+
 <%= link_to 'Back to games', games_path %>
 
 <script>
@@ -37,7 +46,7 @@
           if (data.length) {
             data.forEach(user => {
               const userDiv = document.createElement('div');
-              userDiv.textContent = user.name; 
+              userDiv.textContent = user.name;
               userDiv.onclick = function() {
                 searchInput.value = user.name;
                 resultsDiv.style.display = 'none';

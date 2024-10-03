@@ -7,7 +7,7 @@ body {
 }
 
 .navbar {
-  background-color: #ff0055;
+  background-color: #243b55;
   padding: 15px 20px;
   color: #ffffff;
   text-align: center;
@@ -30,6 +30,22 @@ body {
   color: #ffcccb;
 }
 
+.navbar-icon {
+  color: #ffffff;
+  text-decoration: none;
+  margin: 0 15px;
+  display: inline-block;
+}
+
+.navbar-icon i {
+  margin-right: 5px;
+  font-size: 1.5em;
+}
+
+.navbar-icon:hover {
+  color: #ffd700;
+}
+
 .game-list {
   max-width: 700px;
   margin: 0 auto;
@@ -37,11 +53,12 @@ body {
 
 .game-card {
   border-radius: 15px;
-  padding: 25px;
+  padding: 10px;
   margin-bottom: 20px;
   background: linear-gradient(135deg, #141e30, #243b55);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 0;
 }
 
 .game-card:hover {
@@ -65,6 +82,7 @@ body {
   color: #00e6e6;
   margin-right: 10px;
   font-size: 1.1em;
+  margin-left: 10px;
 }
 
 .player-score {
@@ -81,6 +99,7 @@ body {
   font-size: 2.5em;
   color: #ffffff;
   margin: 0 20px;
+  align-items: center;
 }
 
 .divider {
@@ -95,7 +114,7 @@ body {
 }
 
 .button {
-  background-color: #ff0055;
+  background-color: #243b55;
   color: white;
   padding: 12px 25px;
   border: none;
