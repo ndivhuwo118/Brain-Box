@@ -1,6 +1,3 @@
-# db/seeds.rb
-
-# Clear existing data to ensure a fresh start
 puts "Clearing existing data..."
 GameCategory.destroy_all
 Category.destroy_all
@@ -48,6 +45,9 @@ puts "Creating games..."
     opponent: me == opp ? me : User.all.sample
   )
 end
+
+# Verify games are created
+puts "Games created: #{Game.count}"  # Output the count of games created
 
 # Create rounds for each game
 puts "Creating rounds..."
@@ -115,8 +115,13 @@ questions_and_answers = {
 # Create questions and answers for each category and round
 categories.each do |category_name|
   category = Category.find_by(name: category_name)
+  rounds = Round.all # Fetch all rounds after creating them
   questions_and_answers[category_name].each do |item|
-    round = Round.all.sample
+
+    next unless rounds.any?  # Skip if there are no rounds
+
+    round = rounds.sample # Randomly assign a round
+
     question = Question.create!(
       content: item[:question],
       round: round
@@ -171,5 +176,3 @@ GamePlayer.all.each do |game_player|
     end
   end
 end
-
-puts "Seeding completed!"
