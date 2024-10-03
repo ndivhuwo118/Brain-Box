@@ -44,14 +44,15 @@ class GamesController < ApplicationController
 
   def play
     @game = Game.find(params[:id])
-    @game.start_round!
+    @game.set_rounds
     redirect_to game_round_path(@game, @game.current_round), notice: "Game has started!"
   end
 
   private
 
   def set_game
-    @game = Game.find(params[:id])
+    @game = Game.find_by(id: params[:id])
+    redirect_to games_path, alert: "Game not found." unless @game
   end
 
   def game_params
