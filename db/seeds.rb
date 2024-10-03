@@ -40,9 +40,12 @@ end
 # Create sample games
 puts "Creating games..."
 5.times do
+  me = User.all.sample
+  opp = User.all.sample
   Game.create!(
-    user: User.all.sample, # Randomly assign a user to each game
-    winner_id: User.all.sample.id # Randomly assign a winner
+    user: User.all.sample,
+    winner_id: User.all.sample.id,
+    opponent: me == opp ? me : User.all.sample
   )
 end
 
@@ -113,7 +116,7 @@ questions_and_answers = {
 categories.each do |category_name|
   category = Category.find_by(name: category_name)
   questions_and_answers[category_name].each do |item|
-    round = Round.all.sample # Randomly assign a round
+    round = Round.all.sample
     question = Question.create!(
       content: item[:question],
       round: round
@@ -122,7 +125,7 @@ categories.each do |category_name|
     item[:answers].each_with_index do |answer_content, index|
       Answer.create!(
         content: answer_content,
-        decoy: index > 0, # First answer is correct, others are decoys
+        decoy: index > 0,
         question: question
       )
     end

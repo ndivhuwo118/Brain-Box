@@ -28,15 +28,18 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     @game.user = current_user
+
     @opponent = User.find_by(email: game_params[:user_id])
 
-    # raise
+    if @opponent.nil?
+      flash[:alert] = "Opponent not found. Please select a valid opponent."
+      render :new and return
+    end
+
+    @game.opponent_id = @opponent.id
+
     if @game.save
-      @gp = GamePlayer.new(game: @game, user: current_user)
-      @gp.save
-      @gp = GamePlayer.new(game: @game, user: @opponent)
-      @gp.save
-      redirect_to @game
+      redirect_to @game, notice: 'Game was successfully created.'
     else
       render :new
     end

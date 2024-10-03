@@ -1,8 +1,9 @@
-<h1>Create New Game</h1>
+<h1>Step into the ring</h1>
 
 <%= simple_form_for(@game) do |f| %>
   <div class="field">
-    <%= f.input :user_id, collection: @users, label: "Challenger", prompt: "Select an Opp" %>
+    <%= f.input :user_id, as: :string, label: "Challenger", input_html: { id: 'challenger-search', placeholder: 'Type to search...' } %>
+    <div id="challenger-results" style="display: none;"></div>
   </div>
 
   <div class="field">
@@ -15,3 +16,38 @@
 <% end %>
 
 <%= link_to 'Back to games', games_path %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('challenger-search');
+    const resultsDiv = document.getElementById('challenger-results');
+
+    searchInput.addEventListener('input', function() {
+      const query = searchInput.value;
+
+      if (query.length < 2) {
+        resultsDiv.style.display = 'none';
+        return;
+      }
+
+      fetch(`/users/search?query=${query}`)
+        .then(response => response.json())
+        .then(data => {
+          resultsDiv.innerHTML = '';
+          if (data.length) {
+            data.forEach(user => {
+              const userDiv = document.createElement('div');
+              userDiv.textContent = user.name; 
+              userDiv.onclick = function() {
+                searchInput.value = user.name;
+                resultsDiv.style.display = 'none';
+              resultsDiv.appendChild(userDiv);
+            });
+            resultsDiv.style.display = 'block';
+          } else {
+            resultsDiv.style.display = 'none';
+          }
+        });
+    });
+  });
+</script>

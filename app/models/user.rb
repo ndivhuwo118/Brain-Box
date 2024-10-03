@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :game
   has_many :game_players
   has_many :player_answers
+  has_many :games_as_opponent, class_name: 'Game', foreign_key: 'opponent_id'
 end
