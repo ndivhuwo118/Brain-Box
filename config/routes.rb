@@ -18,13 +18,13 @@ Rails.application.routes.draw do
       post :play
     end
 
-    resources :rounds, only: [:show, :create] do
-      resources :questions, only: [:show]
+    resources :rounds, only: [:show] do
+      member do
+        post :submit_answer
+      end
     end
     resources :users, only: [:show]
-    resources :questions, only: [:show] do
-      resources :answers, only: [:create]
-    end
 
   end
+
 end

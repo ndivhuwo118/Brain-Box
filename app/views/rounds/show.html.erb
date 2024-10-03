@@ -2,7 +2,7 @@
 
 <% if @question %>
   <p>Question: <%= @question.content %></p>
-  <%= button_to "submit an empty answer",  answer_game_round_question_path(@game, @round, @question), params: {next_round: @next_round} %>
+  <%= button_to "submit an empty answer",   submit_answer_game_round_path(@game, @round) %>
 
   <%#= form_with url: game_round_question_path(@game, @round, @question), method: :post do %>
 <!--    <ul>-->
