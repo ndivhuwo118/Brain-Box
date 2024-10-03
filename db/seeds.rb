@@ -1,5 +1,3 @@
-# db/seeds.rb
-
 # Clear existing data to ensure a fresh start
 puts "Clearing existing data..."
 GameCategory.destroy_all
@@ -40,14 +38,19 @@ end
 # Create sample games
 puts "Creating games..."
 5.times do
-  me = User.all.sample
-  opp = User.all.sample
+  user = User.all.sample
+  opponent = User.where.not(id: user.id).sample
+  winner = [user, opponent].sample
+
   Game.create!(
-    user: User.all.sample,
-    winner_id: User.all.sample.id,
-    opponent: me == opp ? me : User.all.sample
+    user: user,
+    winner_id: winner.id,
+    opponent_id: opponent.id
   )
 end
+
+# Verify games are created
+puts "Games created: #{Game.count}"  # Output the count of games created
 
 # Create rounds for each game
 puts "Creating rounds..."
@@ -57,75 +60,96 @@ Game.all.each do |game|
   end
 end
 
-# Create questions and answers
-puts "Creating questions and answers..."
+# Trivia data for questions and answers
 questions_and_answers = {
   "Science" => [
     {
       question: "What is the chemical symbol for water?",
-      answers: ["H2O", "O2", "CO2", "H2"]
+      answers: ["H2O", "O2", "CO2", "H2"],
+      correct_answer: "H2O"
     },
     {
       question: "What planet is known as the Red Planet?",
-      answers: ["Earth", "Mars", "Jupiter", "Saturn"]
+      answers: ["Earth", "Mars", "Jupiter", "Saturn"],
+      correct_answer: "Mars"
     }
   ],
   "History" => [
     {
       question: "Who was the first president of the United States?",
-      answers: ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"]
+      answers: ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"],
+      correct_answer: "George Washington"
     },
     {
       question: "In what year did the Titanic sink?",
-      answers: ["1912", "1905", "1898", "1920"]
+      answers: ["1912", "1905", "1898", "1920"],
+      correct_answer: "1912"
     }
   ],
   "Geography" => [
     {
       question: "What is the capital of France?",
-      answers: ["Paris", "London", "Berlin", "Madrid"]
+      answers: ["Paris", "London", "Berlin", "Madrid"],
+      correct_answer: "Paris"
     },
     {
       question: "Which river is the longest in the world?",
-      answers: ["Amazon", "Nile", "Yangtze", "Mississippi"]
+      answers: ["Amazon", "Nile", "Yangtze", "Mississippi"],
+      correct_answer: "Nile"
     }
   ],
   "Entertainment" => [
     {
       question: "Who directed 'Jurassic Park'?",
-      answers: ["Steven Spielberg", "James Cameron", "George Lucas", "Peter Jackson"]
+      answers: ["Steven Spielberg", "James Cameron", "George Lucas", "Peter Jackson"],
+      correct_answer: "Steven Spielberg"
     },
     {
       question: "What is the highest-grossing film of all time?",
-      answers: ["Avatar", "Titanic", "Star Wars", "The Avengers"]
+      answers: ["Avatar", "Titanic", "Star Wars", "The Avengers"],
+      correct_answer: "Avatar"
     }
   ],
   "Sports" => [
     {
       question: "In which sport is the term 'home run' used?",
-      answers: ["Baseball", "Football", "Basketball", "Soccer"]
+      answers: ["Baseball", "Football", "Basketball", "Soccer"],
+      correct_answer: "Baseball"
     },
     {
       question: "How many players are there on a soccer team?",
-      answers: ["11", "7", "9", "5"]
+      answers: ["11", "7", "9", "5"],
+      correct_answer: "11"
     }
   ]
 }
 
 # Create questions and answers for each category and round
+puts "Creating questions and answers..."
 categories.each do |category_name|
   category = Category.find_by(name: category_name)
   questions_and_answers[category_name].each do |item|
-    round = Round.all.sample
+    round = Round.all.sample # Randomly assign a round
+
+    next unless round # Skip if there are no rounds
+
     question = Question.create!(
       content: item[:question],
       round: round
     )
 
-    item[:answers].each_with_index do |answer_content, index|
+    # Create correct answer
+    Answer.create!(
+      content: item[:correct_answer],
+      decoy: false,
+      question: question
+    )
+
+    # Create incorrect (decoy) answers
+    item[:answers].reject { |ans| ans == item[:correct_answer] }.each do |decoy_answer|
       Answer.create!(
-        content: answer_content,
-        decoy: index > 0,
+        content: decoy_answer,
+        decoy: true,
         question: question
       )
     end
@@ -172,4 +196,4 @@ GamePlayer.all.each do |game_player|
   end
 end
 
-puts "Seeding completed!"
+puts "Seeding complete!"

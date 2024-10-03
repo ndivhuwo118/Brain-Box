@@ -38,6 +38,7 @@ class GamesController < ApplicationController
 
     @game.opponent_id = @opponent.id
 
+
     if @game.save
       redirect_to @game, notice: 'Game was successfully created.'
     else
@@ -45,10 +46,16 @@ class GamesController < ApplicationController
     end
   end
 
+  def play
+    @game = Game.find(params[:id])
+    redirect_to game_round_path(@game, @game.rounds.first), notice: "Game has started!"
+  end
+
   private
 
   def set_game
-    @game = Game.find(params[:id])
+    @game = Game.find_by(id: params[:id])
+    redirect_to games_path, alert: "Game not found." unless @game
   end
 
   def game_params
