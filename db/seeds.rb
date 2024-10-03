@@ -1,4 +1,12 @@
-# db/seeds.rb
+require 'net/http'
+require 'json'
+
+# Method to fetch trivia questions from Open Trivia Database
+def fetch_trivia_questions(amount, difficulty)
+  url = URI("https://opentdb.com/api.php?amount=#{amount}&difficulty=#{difficulty}")
+  response = Net::HTTP.get(url)
+  JSON.parse(response)["results"]
+end
 
 # Clear existing data to ensure a fresh start
 puts "Clearing existing data..."
@@ -57,78 +65,36 @@ Game.all.each do |game|
   end
 end
 
-# Create questions and answers
+# Fetch questions from Open Trivia API
+puts "Fetching trivia questions..."
+questions_and_answers = fetch_trivia_questions(3, 'medium')
+
+# Create questions and answers using trivia data
 puts "Creating questions and answers..."
-questions_and_answers = {
-  "Science" => [
-    {
-      question: "What is the chemical symbol for water?",
-      answers: ["H2O", "O2", "CO2", "H2"]
-    },
-    {
-      question: "What planet is known as the Red Planet?",
-      answers: ["Earth", "Mars", "Jupiter", "Saturn"]
-    }
-  ],
-  "History" => [
-    {
-      question: "Who was the first president of the United States?",
-      answers: ["George Washington", "Thomas Jefferson", "Abraham Lincoln", "John Adams"]
-    },
-    {
-      question: "In what year did the Titanic sink?",
-      answers: ["1912", "1905", "1898", "1920"]
-    }
-  ],
-  "Geography" => [
-    {
-      question: "What is the capital of France?",
-      answers: ["Paris", "London", "Berlin", "Madrid"]
-    },
-    {
-      question: "Which river is the longest in the world?",
-      answers: ["Amazon", "Nile", "Yangtze", "Mississippi"]
-    }
-  ],
-  "Entertainment" => [
-    {
-      question: "Who directed 'Jurassic Park'?",
-      answers: ["Steven Spielberg", "James Cameron", "George Lucas", "Peter Jackson"]
-    },
-    {
-      question: "What is the highest-grossing film of all time?",
-      answers: ["Avatar", "Titanic", "Star Wars", "The Avengers"]
-    }
-  ],
-  "Sports" => [
-    {
-      question: "In which sport is the term 'home run' used?",
-      answers: ["Baseball", "Football", "Basketball", "Soccer"]
-    },
-    {
-      question: "How many players are there on a soccer team?",
-      answers: ["11", "7", "9", "5"]
-    }
-  ]
-}
+questions_and_answers.each do |trivia|
+  round = Round.all.sample
+  question = Question.create!(
+    content: trivia["question"],
+    round: round
+  )
 
-# Create questions and answers for each category and round
-categories.each do |category_name|
-  category = Category.find_by(name: category_name)
-  questions_and_answers[category_name].each do |item|
-    round = Round.all.sample
-    question = Question.create!(
-      content: item[:question],
-      round: round
+  correct_answer = trivia["correct_answer"]
+  incorrect_answers = trivia["incorrect_answers"]
+
+  # Create correct answer
+  Answer.create!(
+    content: correct_answer,
+    decoy: false,
+    question: question
+  )
+
+  # Create incorrect (decoy) answers
+  incorrect_answers.each do |decoy_answer|
+    Answer.create!(
+      content: decoy_answer,
+      decoy: true,
+      question: question
     )
-
-    item[:answers].each_with_index do |answer_content, index|
-      Answer.create!(
-        content: answer_content,
-        decoy: index > 0,
-        question: question
-      )
-    end
   end
 end
 
