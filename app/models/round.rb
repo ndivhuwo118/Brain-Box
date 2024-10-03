@@ -8,4 +8,5 @@ class Round < ApplicationRecord
   def set_question
     Question.create(round_id: self.id)
   end
+
 end

@@ -3,6 +3,7 @@ class Question < ApplicationRecord
   belongs_to :round
   has_many :answers
 
+
   def content
     if super.blank?
       set_content
@@ -25,4 +26,5 @@ class Question < ApplicationRecord
     update(content: new_content)
     return new_content
   end
+
 end
