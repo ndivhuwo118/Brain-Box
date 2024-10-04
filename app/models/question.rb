@@ -1,7 +1,9 @@
 class Question < ApplicationRecord
-  after_save :content
+  after_save :content, unless: :seeding?
   belongs_to :round
   has_many :answers
+
+
 
   def content
     if super.blank?
@@ -12,6 +14,10 @@ class Question < ApplicationRecord
   end
 
   private
+
+  def seeding?
+    ENV['SEEDING'] == 'true'
+  end
 
   def set_content
     categories = round.game.categories
