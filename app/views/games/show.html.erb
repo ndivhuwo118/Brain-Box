@@ -1,1 +1,3 @@
-<button type="button" class="btn btn-primary">Play Now</button>
+<%= button_to "Play", play_game_path(@game), class: "btn btn-primary"  %>
+<%# <p>Opponent <%= @game.opponent.nickname %></p>
+<p>Categories: <%= @game.categories.map(&:name).join(", ") %></p>
