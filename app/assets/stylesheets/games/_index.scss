@@ -1,27 +1,31 @@
 body {
-  background-color: #f0f4f8;
-  font-family: 'Roboto', sans-serif;
+  background-color: grey;
+  font-family: 'Press Start 2P', cursive;
   margin: 0;
   padding: 20px;
+  color: #e0e0e0;
 }
+// fixed the navbar styling
+
 
 .game-list {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
 .game-card {
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 15px;
-  background: linear-gradient(135deg, #4a90e2, #50e3c2);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s, box-shadow 0.3s;
+  border-radius: 0;
 }
 
 .game-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
 .game-info {
@@ -37,48 +41,66 @@ body {
 
 .player-email {
   font-weight: bold;
-  color: #ffffff;
+  color: #00e6e6;
   margin-right: 10px;
+  font-size: 1.1em;
+  margin-left: 10px;
 }
 
 .player-score {
-  font-size: 1.5em;
-  color: #ffffff;
+  font-size: 2em;
+  color: #ffcc00;
   margin-right: 10px;
-  background-color: rgba(0, 0, 0, 0.3);
-  padding: 5px 10px;
-  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 5px 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px #ffcc00;
 }
 
 .vs {
-  font-size: 2em;
+  font-size: 2.5em;
   color: #ffffff;
-  margin: 0 15px;
+  margin: 0 20px;
+  align-items: center;
 }
 
 .divider {
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  margin: 10px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 15px 0;
 }
 
 .new-game {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .button {
-  background-color: #e94e77;
+  background-color: #243b55;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 25px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   text-decoration: none;
-  font-size: 1.2em;
+  font-size: 1.4em;
   transition: background-color 0.3s, transform 0.3s;
+  box-shadow: 0 4px 15px rgba(255, 0, 85, 0.4);
 }
 
 .button:hover {
-  background-color: #d6396b;
-  transform: scale(1.05);
+  background-color: #d60045;
+  transform: scale(1.1);
+}
+
+
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://example.com/gamer-pattern.png') repeat;
+  opacity: 0.1;
+  pointer-events: none;
 }

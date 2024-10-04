@@ -1,6 +1,9 @@
 class QuestionsController < ApplicationController
 
   def show
+
+    @questions = Question.find(params[:id])
+    @answers = @questions.answers
     @game = Game.find(params[:game_id])
     @round = @game.rounds.find(params[:round_id])
     @question = @round.questions.find(params[:id])
