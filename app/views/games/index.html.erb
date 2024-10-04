@@ -42,9 +42,8 @@
     </a>
     <a href="#messages" class="navbar-icon">
         <i class="fa-solid fa-message"></i> Messages
+    <%= link_to new_game_path, class: "navbar-icon" do %>
+        <i class="fa-solid fa-play"></i> Play
     </a>
-</div>
-
-<div class="new-game">
-  <%= link_to "New Game", new_game_path, class: "button" %>
+    <% end %>
 </div>
