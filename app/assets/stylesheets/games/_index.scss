@@ -6,45 +6,6 @@ body {
   color: #e0e0e0;
 }
 
-.navbar {
-  background-color: #243b55;
-  padding: 15px 20px;
-  color: #ffffff;
-  text-align: center;
-  font-size: 1.2em;
-  box-shadow: 0 4px 10px rgba(255, 0, 85, 0.4);
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-}
-
-.navbar a {
-  color: #ffffff;
-  text-decoration: none;
-  margin-right: 20px;
-  transition: color 0.3s;
-}
-
-.navbar a:hover {
-  color: #ffcccb;
-}
-
-.navbar-icon {
-  color: #ffffff;
-  text-decoration: none;
-  margin: 0 15px;
-  display: inline-block;
-}
-
-.navbar-icon i {
-  margin-right: 5px;
-  font-size: 1.5em;
-}
-
-.navbar-icon:hover {
-  color: #ffd700;
-}
 
 .game-list {
   max-width: 700px;
