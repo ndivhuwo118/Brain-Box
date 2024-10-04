@@ -1,0 +1,16 @@
+
+<%= simple_form_for @question, url: question_answers_path(@question), local: true do |f| %>
+  <%= f.simple_fields_for :answers do |answer_form| %>
+    <div class="answer-fields">
+      <%= answer_form.input :content, label: "Answer", input_html: { placeholder: "Enter answer text" } %>
+
+      <%= answer_form.input :correct, as: :boolean, label: "Correct?", inline_label: "Mark as correct" %>
+
+      <%= answer_form.input :decoy, as: :hidden, input_html: { value: false } %>
+    </div>
+  <% end %>
+
+  <div class="submit-button">
+    <%= f.submit "Submit Answers", class: "btn btn-primary" %>
+  </div>
+<% end %>
