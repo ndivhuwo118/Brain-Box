@@ -1,4 +1,5 @@
 # Clear existing data to ensure a fresh start
+ENV['SEEDING'] = 'true'
 puts "Clearing existing data..."
 GameCategory.destroy_all
 Category.destroy_all
@@ -197,3 +198,4 @@ GamePlayer.all.each do |game_player|
 end
 
 puts "Seeding complete!"
+ENV['SEEDING'] = 'true'
