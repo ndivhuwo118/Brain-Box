@@ -34,21 +34,37 @@ body {
   align-items: center;
 }
 
+.game-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
 .player {
   display: flex;
   align-items: center;
+  flex: 1;
+  text-align: center;
+  font-size: 1.6em;
+  padding: 10px;
+}
+
+.container {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .player-email {
   font-weight: bold;
   color: #00e6e6;
-  margin-right: 10px;
+  margin-right: 11px;
   font-size: 1.1em;
   margin-left: 10px;
 }
 
 .player-score {
-  font-size: 2em;
+  font-size: 4em;
   color: #ffcc00;
   margin-right: 10px;
   background-color: rgba(0, 0, 0, 0.6);
@@ -60,8 +76,9 @@ body {
 .vs {
   font-size: 2.5em;
   color: #ffffff;
-  margin: 0 20px;
   align-items: center;
+  width: 50px;
+  text-align: center;
 }
 
 .divider {
