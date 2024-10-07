@@ -16,13 +16,28 @@ puts "Creating users..."
 user_emails = [
   "david@gmail.com",
   "darian@gmail.com",
-  "ndi@gmail.com"
+  "ndi@gmail.com",
+  "skylar@gmail.com",
+  "mav@gmail.com",
+  "riley@gmail.com",
+  "kai@gmail.com",
+  "leo@gmail.com",
+  "finn@gmail.com",
+  "juno@gmail.com",
 ]
 
 user_nicknames = [
   "jr",
   "darian",
-  "ndivo"
+  "ndivo",
+  "skylar",
+  "mav",
+  "riley",
+  "kai",
+  "leo",
+  "finn",
+  "juno"
+
 ]
 
 user_emails.each_with_index do |email, index|
