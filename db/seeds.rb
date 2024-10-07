@@ -126,6 +126,7 @@ questions_and_answers = {
 }
 
 # Create questions and answers for each category and round
+# Create questions and answers for each category and round
 puts "Creating questions and answers..."
 categories.each do |category_name|
   category = Category.find_by(name: category_name)
@@ -142,15 +143,15 @@ categories.each do |category_name|
     # Create correct answer
     Answer.create!(
       content: item[:correct_answer],
-      decoy: false,
+      decoy: false, # Correct answer
       question: question
     )
 
-    # Create incorrect (decoy) answers
+    # Ensure only decoy answers (incorrect) are marked with decoy: true
     item[:answers].reject { |ans| ans == item[:correct_answer] }.each do |decoy_answer|
       Answer.create!(
         content: decoy_answer,
-        decoy: true,
+        decoy: true, # Incorrect answer
         question: question
       )
     end

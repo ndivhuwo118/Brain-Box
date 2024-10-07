@@ -8,10 +8,12 @@ class Answer < ApplicationRecord
   private
 
   def only_one_correct_answer
-    if question.answers.where(decoy: false).count >= 1 && decoy
-      errors.add(:decoy, "Can only have one correct answer!")
+    if decoy == false && question.answers.where(decoy: false).exists?
+      errors.add(:decoy, "Can only have one correct answer for each question!")
     end
   end
+end
+
 
   # def validate_content
   #   # Ensure that the answer has been set properly.
@@ -25,4 +27,3 @@ class Answer < ApplicationRecord
   #   # For example, you could log a warning if an answer is saved without content.
   #   Rails.logger.warn("Answer for question ID #{question.id} was saved without content.")
   # end
-end
