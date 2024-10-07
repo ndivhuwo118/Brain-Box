@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  after_save :set_rounds
+  after_save :set_rounds, unless: :seeding?
   belongs_to :user
   belongs_to :opponent, class_name: 'User'
 
@@ -11,6 +11,9 @@ class Game < ApplicationRecord
   has_many :users, through: :game_players, as: :players
   has_many :players, through: :game_players, source: :user
 
+  def seeding?
+    ENV['SEEDING'] == 'true'
+  end
   def set_rounds
     # return if self.rounds.any?
 

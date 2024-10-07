@@ -2,10 +2,14 @@ body {
   background-color: grey;
   font-family: 'Press Start 2P', cursive;
   margin: 0;
-  padding: 20px;
+  padding: 10px;
   color: #e0e0e0;
+  max-width: 390px;
+  height: 844px;
+  overflow-x: hidden;
+  margin: 0 auto;
 }
-// fixed the navbar styling
+
 
 
 .game-list {
