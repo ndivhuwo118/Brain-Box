@@ -145,9 +145,11 @@ questions_and_answers = {
 puts "Creating questions and answers..."
 categories.each do |category_name|
   category = Category.find_by(name: category_name)
+
+  next unless category # Skip if the category does not exist
+
   questions_and_answers[category_name].each do |item|
     round = Round.all.sample # Randomly assign a round
-
     next unless round # Skip if there are no rounds
 
     question = Question.create!(
@@ -155,15 +157,27 @@ categories.each do |category_name|
       round: round
     )
 
-    # Create correct answer
+    # Create the correct answer
     Answer.create!(
       content: item[:correct_answer],
       decoy: false, # Correct answer
       question: question
     )
 
-    # Ensure only decoy answers (incorrect) are marked with decoy: true
-    item[:answers].reject { |ans| ans == item[:correct_answer] }.each do |decoy_answer|
+    # Gather incorrect answers
+    incorrect_answers = item[:answers].reject { |ans| ans == item[:correct_answer] }
+
+    # Ensure there are enough valid incorrect answers
+    next if incorrect_answers.length < 3  # Skip if not enough incorrect answers
+
+    # Randomly select three unique decoys
+    selected_decoys = incorrect_answers.sample(3)
+
+    # Create decoy answers
+    selected_decoys.each do |decoy_answer|
+      # Ensure we're not creating nil content
+      next if decoy_answer.nil?
+
       Answer.create!(
         content: decoy_answer,
         decoy: true, # Incorrect answer
