@@ -2,7 +2,7 @@
 
 <%= simple_form_for(@game) do |f| %>
   <div class="field">
-    <%= f.input :user_id, as: :string, label: "Challenger", input_html: { id: 'challenger-search', placeholder: 'Type to search...' } %>
+    <%= f.input :user_id,  collection: @users, label: "Challenger", input_html: { id: 'challenger-search', placeholder: 'Type to search...' } %>
     <div id="challenger-results" style="display: none;"></div>
   </div>
 
