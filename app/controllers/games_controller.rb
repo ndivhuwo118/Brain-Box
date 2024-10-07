@@ -19,7 +19,7 @@ class GamesController < ApplicationController
     @users = []
     User.all.each do |user|
       if user != current_user
-        @users << user.email
+        @users << user.nickname
       end
     end
     @game = Game.new
@@ -29,7 +29,7 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
     @game.user = current_user
 
-    @opponent = User.find_by(email: game_params[:user_id])
+    @opponent = User.find_by(nickname: game_params[:user_id])
 
     if @opponent.nil?
       flash[:alert] = "Opponent not found. Please select a valid opponent."
