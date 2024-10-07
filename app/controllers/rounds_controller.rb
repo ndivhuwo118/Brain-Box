@@ -4,6 +4,7 @@ class RoundsController < ApplicationController
     @round = Round.find(params[:id])
     @question = @round.question
     @answers = @question.answers
+    @game_player = @game.game_players.where(user: current_user)
     # # selected_answer = Answer.find(params[:answer_id])
 
     # if selected_answer.correct?
@@ -18,6 +19,4 @@ class RoundsController < ApplicationController
     #   redirect_to games_path
     # end
   end
-
-
 end

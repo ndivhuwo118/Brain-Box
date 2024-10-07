@@ -43,7 +43,7 @@ class Question < ApplicationRecord
     })
 
     answer_texts = answer_response["choices"][0]["message"]["content"].split("\n").reject(&:empty?)
-      
+
     correct_answer = answer_texts[0] # Assuming first answer is correct
     decoy_answers = answer_texts[1..2] # Assuming the next two are decoys
 

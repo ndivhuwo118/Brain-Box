@@ -40,7 +40,9 @@ class GamesController < ApplicationController
 
 
     if @game.save
-      redirect_to @game, notice: 'Game was successfully created.'
+      GamePlayer.create!(game: @game, user: current_user)
+      GamePlayer.create!(game: @game, user: @opponent)
+      redirect_to root_path, notice: 'Game was successfully created.'
     else
       render :new
     end
