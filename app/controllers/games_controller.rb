@@ -42,7 +42,7 @@ class GamesController < ApplicationController
     if @game.save
       GamePlayer.create!(game: @game, user: current_user)
       GamePlayer.create!(game: @game, user: @opponent)
-      redirect_to root_path, notice: 'Game was successfully created.'
+      redirect_to loading_game_path(@game), notice: 'Game was successfully created.'
     else
       render :new
     end
@@ -51,6 +51,11 @@ class GamesController < ApplicationController
   def play
     @game = Game.find(params[:id])
     redirect_to game_round_path(@game, @game.rounds.first), notice: "Game has started!"
+  end
+
+  def loading
+    @game = Game.find(params[:id])
+    @first_round = @game.rounds.first
   end
 
   private
