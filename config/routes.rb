@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       post :play
       get :loading
       get :results
+      get:final
     end
 
     resources :rounds, only: [:show]

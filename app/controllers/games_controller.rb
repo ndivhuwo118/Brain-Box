@@ -64,6 +64,10 @@ class GamesController < ApplicationController
     @score = @game.current_player.score
   end
 
+  def final
+    @game = Game.find(params[:id])
+    @winner = @game.winner!
+  end
   private
 
   def set_game

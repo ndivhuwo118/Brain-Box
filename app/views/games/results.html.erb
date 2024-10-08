@@ -1,7 +1,11 @@
 <div class="results-container">
-  <h1>you answered...</h1>
+  <h1>Your results</h1>
 
   <h1><%= @score %> / <%= @rounds %> questions</h1>
 
-  <h1>correctly</h1>
+  <h1>Correctly</h1>
+
+              <%= link_to 'The champion is..', final_game_path, class: 'btn btn-danger', role: 'button' %>
+
+
 </div>
