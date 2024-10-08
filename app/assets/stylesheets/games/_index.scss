@@ -171,18 +171,18 @@ body::after {
   }
 
   .player-score {
-    background: #ffcc00;
-    color: #000;
+    background:red;
+    color:white;
     font-size: 1.5rem;
-    padding: 10px;
+    padding: 10px 16px;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(255, 204, 0, 0.8);
+    box-shadow: 0 2px 5px rgba(255, 0, 0, 0.8);
   }
 
   .vs {
     font-size: 2rem;
     color: #ff4757;
-    text-shadow: 1px 1px #fff;
+
   }
 
   .btn {
@@ -217,11 +217,30 @@ body::after {
     transition: color 0.3s ease;
   }
 
+  .navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p {
+      height: 100px;
+      width: 100px;
+      background-image: url('punching.png');
+      margin: 0px;
+      font-size: 32px;
+    }
+}
+
   .navbar-icon:hover {
     color: #ffcc00;
   }
 
   .winner {
-    background: #d60045;
+    background:#02367a;
+    box-shadow: 0 2px 5px rgba(0, 132, 255, 0.8);
 
   }
