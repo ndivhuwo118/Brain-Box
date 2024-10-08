@@ -34,7 +34,8 @@ class QuestionsController < ApplicationController
     if @next_round
       redirect_to game_round_path(@game, @next_round)
     else
-      # winner! method 
+      # winner! method
+      @game.winner!
       redirect_to games_path
     end
   end
