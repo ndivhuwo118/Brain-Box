@@ -22,7 +22,6 @@ class Game < ApplicationRecord
   def current_round
     rounds.order(:round_number).last
   end
-<<<<<<< HEAD
 
   def winner!
     # self.game_players

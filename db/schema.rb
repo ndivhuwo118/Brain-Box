@@ -44,6 +44,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_08_095033) do
     t.integer "score", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "played", default: false
     t.index ["game_id"], name: "index_game_players_on_game_id"
     t.index ["user_id"], name: "index_game_players_on_user_id"
   end
@@ -73,6 +74,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_08_095033) do
     t.bigint "round_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "question_number", default: 1
     t.index ["round_id"], name: "index_questions_on_round_id"
   end
 
@@ -81,6 +83,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_08_095033) do
     t.integer "round_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "done", default: false
     t.index ["game_id"], name: "index_rounds_on_game_id"
   end
 
