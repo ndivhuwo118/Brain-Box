@@ -10,6 +10,11 @@ class SetRoundsJob < ApplicationJob
 
       round_number += 1
     end
-    # Do something later
+
+    Turbo::StreamsChannel.broadcast_update_to(
+      "game_#{game.id}",
+      target: "game_#{game.id}",
+      partial: "games/ready", locals: { game: game }
+     )
   end
 end

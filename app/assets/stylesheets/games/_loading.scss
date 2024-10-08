@@ -4,8 +4,8 @@
 }
 
 h1 {
-  font-size: 3em;
-  color: #ff4500;
+  font-size: 4em;
+  color: #f70198;
   text-transform: uppercase;
   margin-bottom: 40px;
 }
@@ -16,16 +16,18 @@ h1 {
 }
 
 .play-button {
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: bold;
   text-transform: uppercase;
-  background: linear-gradient(45deg, #ff4500, #ff7f50);
+  background: linear-gradient(45deg, #08a5fe, #ff7f50);
   color: white;
-  padding: 15px 30px;
+  padding: 20px 40px; 
   border-radius: 50px;
   text-decoration: none;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  display: inline-block;
+  margin: 0 auto;
 }
 
 .play-button:hover {
