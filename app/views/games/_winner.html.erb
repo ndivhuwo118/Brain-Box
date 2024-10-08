@@ -1,0 +1,9 @@
+<div id="winner_<%= dom_id(game)%>" >
+  <%= turbo_stream_from "winner_#{dom_id(game)}" %>
+  <% if game.winner_id %>
+    <%= link_to 'The champion is..', final_game_path(game), class: 'btn btn-danger', role: 'button' %>
+  <% else %>
+    <p>Waiting for your opponent to strike</p>
+    <%= current_user.id %>
+  <% end %>
+</div>
