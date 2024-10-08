@@ -21,6 +21,7 @@ gem "jbuilder"
 gem "httparty"
 gem "ruby-openai"
 gem "solid_queue"
+gem "solid_cable"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
