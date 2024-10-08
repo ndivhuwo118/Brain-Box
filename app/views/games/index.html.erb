@@ -15,8 +15,8 @@
           </span>
 
           <div class="player">
-            <span class="player-score"><%= game.game_players.second.score %></span>
             <span class="player-email"><%= game.game_players.second.user.nickname %></span>
+            <span class="player-score"><%= game.game_players.second.score %></span>
           </div>
         </div>
       </div>
@@ -32,8 +32,8 @@
       <div class="game-card boxing-card">
         <div class="game-info">
           <div class="player">
-            <span class="player-score <%= "winner" if game.game_players.first.score > game.game_players.second.score%>"><%= game.game_players.first.score %></span>
             <span class="player-email"><%= game.game_players.first.user.nickname %></span>
+            <span class="player-score <%= "winner" if game.game_players.first.score > game.game_players.second.score%>"><%= game.game_players.first.score %></span>
           </div>
           <span class="vs"><%= image_tag "boxing-gloves" %></span>
           <div class="player">
@@ -46,14 +46,4 @@
   <% end %>
 </div>
 
-<div class="navbar">
-  <a href="#games" class="navbar-icon">
-    <i class="fas fa-gamepad"></i>
-  </a>
-  <%= link_to new_game_path, class: "navbar-icon" do %>
-    <span class="vs"><%= image_tag "punching" %></span>
-  <% end %>
-  <a href="#messages" class="navbar-icon">
-    <i class="fa-solid fa-message"></i>
-  </a>
-</div>
+
