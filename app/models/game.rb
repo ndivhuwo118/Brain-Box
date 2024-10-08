@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
-  after_save :set_rounds, unless: :seeding?
+  after_create :set_rounds, unless: :seeding?
   belongs_to :user
   belongs_to :opponent, class_name: 'User'
 
@@ -21,5 +21,26 @@ class Game < ApplicationRecord
 
   def current_round
     rounds.order(:round_number).last
+  end
+
+  def winner!
+    # self.game_players
+    # if the current user of the game wins, they will be assigned the winner_id
+    current_player = game_players.find_by(user_id: user.id)
+    opponent_player = game_players.find_by(user_id: opponent.id)
+    p current_player
+
+    if current_player.score > opponent_player.score
+      update(winner_id: user.id)
+      winner = user
+    else
+      update(winner_id: opponent.id)
+      return opponent
+      winner = opponent
+    end
+    # else the opponent will get it
+    return User.find(winner.id)
+    # Or if the score is the same then the match will be considered a draw
+    # Ensure there are players in the game
   end
 end
