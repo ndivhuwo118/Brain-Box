@@ -40,11 +40,12 @@
 
 
 <div class="navbar">
-  <a href="#games" class="navbar-icon">
+  <%= link_to games_path, class:"navbar-icon" do %>
     <i class="fas fa-gamepad"></i>
+  <% end %>
   </a>
   <%= link_to new_game_path, class: "navbar-icon" do %>
-    <p>BRAIN BOX</p>
+    <%= image_tag 'punching' %>
   <% end %>
   <a href="#messages" class="navbar-icon">
     <i class="fa-solid fa-message"></i>
