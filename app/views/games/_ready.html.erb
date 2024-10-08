@@ -1,0 +1,15 @@
+<div id="<%= dom_id(game) %>" >
+  <%= turbo_stream_from dom_id(game) %>
+<% if game.rounds.any? %>
+    <%= link_to "Play", game_round_path(game, game.rounds.first), class: "play-button" %>
+  <% else %>
+    <p>LOADING</p>
+  <% end %>
+</div>
+
+
+
+
+
+
+
