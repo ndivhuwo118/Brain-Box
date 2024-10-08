@@ -21,8 +21,11 @@ class QuestionsController < ApplicationController
     # Update the game state based on the selected answer
     if selected_answer == @correct_answer
       @game_player = @game.game_players.find_by(user: current_user)
-      @game_player.score += (7..13).to_a.sample
-      @game_player.save
+      @game_player.score += 1
+
+      if @game_player.save
+        p "score updated"
+      end
     end
 
     @next_round = @game.rounds.find_by(round_number: @round.round_number + 1)
