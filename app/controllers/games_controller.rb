@@ -58,6 +58,12 @@ class GamesController < ApplicationController
     @first_round = @game.rounds.first
   end
 
+  def results
+    @game = Game.find(params[:id])
+    @rounds = @game.rounds.count
+    @score = @game.current_player.score
+  end
+
   private
 
   def set_game
