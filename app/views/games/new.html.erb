@@ -1,32 +1,42 @@
-<h1>Step into the ring</h1>
+<h1 class="text-center title">Step into the Ring</h1>
 
-<%= simple_form_for(@game) do |f| %>
-  <div class="field">
-    <%= f.input :user_id,  collection: @users, label: "Challenger", input_html: { id: 'challenger-search', placeholder: 'Type to search...' } %>
-    <div id="challenger-results" style="display: none;"></div>
-  </div>
+<div class="form-container boxing-form-container">
+  <%= simple_form_for(@game) do |f| %>
+    <!-- Challenger Search -->
+    <div class="form-group">
+      <%= f.label :user_id, "Choose Your Challenger", class: 'form-label' %>
+      <%= f.input :user_id, collection: @users, input_html: { class: 'form-control', id: 'challenger-search', placeholder: 'Type to search...' } %>
+      <div id="challenger-results" class="dropdown-menu"></div>
+    </div>
 
-  <div class="field">
+    <!-- Categories in Grid -->
+    <div class="form-group">
+      <%= f.label :category_ids, "Select Categories", class: 'form-label' %>
+      <div class="grid-container">
+        <%= f.input :category_ids, collection: @categories, as: :check_boxes, label_method: :name, input_html: { class: 'category-checkbox' }, item_wrapper_class: 'category-item' %>
+      </div>
+    </div>
 
-    <%= f.input :category_ids, collection: @categories, as: :check_boxes, label: "Select Categories" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<div class="navbar">
-    <a href="#games" class="navbar-icon">
-        <i class="fas fa-gamepad"></i> Games
-    </a>
-    <a href="#messages" class="navbar-icon">
-        <i class="fa-solid fa-message"></i> Messages
-    </a>
+    <!-- Submit Button -->
+    <div class="form-group">
+      <%= f.submit 'Let\'s Fight!', class: 'btn fight-btn w-100' %>
+    </div>
+  <% end %>
 </div>
 
-<%= link_to 'Back to games', games_path %>
+<!-- Navbar -->
+<div class="navbar boxing-navbar">
+  <a href="#games" class="navbar-icon">
+    <i class="fas fa-gamepad"></i> Games
+  </a>
+  <a href="#messages" class="navbar-icon">
+    <i class="fa-solid fa-message"></i> Messages
+  </a>
+</div>
 
+<%= link_to 'Back to games', games_path, class: 'btn back-btn' %>
+
+<!-- JavaScript for Challenger Search -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('challenger-search');
@@ -48,9 +58,11 @@
             data.forEach(user => {
               const userDiv = document.createElement('div');
               userDiv.textContent = user.name;
+              userDiv.classList.add('dropdown-item');
               userDiv.onclick = function() {
                 searchInput.value = user.name;
                 resultsDiv.style.display = 'none';
+              }
               resultsDiv.appendChild(userDiv);
             });
             resultsDiv.style.display = 'block';
@@ -61,4 +73,6 @@
     });
   });
 </script>
+
+
 

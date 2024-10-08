@@ -1,1 +1,126 @@
 
+
+
+body {
+  font-family: 'Anton', sans-serif;
+
+  background-image:url(https://images.unsplash.com/photo-1622599518895-be813cc42628?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-size: cover;
+  color: #fff;
+  text-shadow: 1px 1px 5px #000;
+}
+
+.title {
+  color: #ff4757;
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+}
+
+.form-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.85);
+  border-radius: 15px;
+  border: 3px solid #ff4757;
+  box-shadow: 0 8px 40px rgba(255, 71, 87, 0.7);
+}
+
+.form-label {
+  font-weight: bold;
+  font-size: 1.4rem;
+  color: #ff4757;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 6px #000;
+}
+
+.form-control {
+  padding: 14px;
+  font-size: 1.1rem;
+  border-radius: 6px;
+  background-color: #1c1c1c;
+  color: #fff;
+  border: 2px solid #ff4757;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #ffcc00;
+  outline: none;
+  box-shadow: 0 0 12px #ffcc00;
+}
+
+.form-control::placeholder {
+  color: #bbb;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+  padding: 10px 0;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #1c1c1c;
+  padding: 12px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  border: 2px solid #ff4757;
+}
+
+.category-item:hover {
+  background-image: url('https://images.unsplash.com/photo-1622599511051-16f55a1234d0?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Boxing-themed background */
+  box-shadow: 0 0 15px #ff4757;
+  color: #fff;
+}
+
+.btn {
+  padding: 16px;
+  font-size: 1.3rem;
+  border-radius: 8px;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  color: #fff;
+  background-color: #d0021b;
+}
+
+.fight-btn {
+  background-color: #d0021b;
+  border: 3px solid #ffcc00;
+  box-shadow: 0 8px 20px rgba(255, 204, 0, 0.8);
+}
+
+.fight-btn:hover {
+  background-color: #ff0000;
+  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background: rgba(255, 71, 87, 0.9);
+  border-top: 2px solid #fff;}
+
+.navbar-icon {
+  color: #fff;
+  font-size: 2rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar-icon:hover {
+  color: #ffcc00;
+}
