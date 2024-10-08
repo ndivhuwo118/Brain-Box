@@ -3,13 +3,7 @@
 <% if game.rounds.any? %>
     <%= link_to "Play", game_round_path(game, game.rounds.first), class: "play-button" %>
   <% else %>
-    <p>LOADING</p>
+
+    <%= image_tag'warmup', class:'ready' %>
   <% end %>
 </div>
-
-
-
-
-
-
-
