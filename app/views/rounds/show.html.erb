@@ -1,22 +1,24 @@
-<h1 class="text-center title">Round <%= @round.round_number %> for Game <%= @game.id %></h1>
+<h1 class="text-center title">Round <%= @round.round_number %></h1>
 
 <div class="form-container question-card">
   <% if @question %>
-    <p class="question-content">Question: <%= @question.content %></p>
+    <p class="question-content"><%= @question.content %></p>
 
-    <%#= form_with url: submit_answer_question_path(@question, game_id: @game.id, round_id: @round.id), method: :post do %>
-      <%= form_with url: submit_answer_question_path(@question) do %>
-        <ul>
-          <% @question.answers.each do |answer| %>
-            <li>
-              <%= radio_button_tag 'answer_id', answer.id %>
-              <%= label_tag "answer_id_#{answer.id}", answer.content %>
-            </li>
-          <% end %>
-        </ul>
-        <%= submit_tag "Submit" %>
-      <% end %>
+    <%= form_with url: submit_answer_question_path(@question) do %>
+      <div class="answer-buttons">
+        <% @question.answers.each do |answer| %>
+          <% id = "answer_#{answer.id}" %>
+          <%= radio_button_tag 'answer_id', answer.id, id: id, class: 'hidden-radio' %>
+          <label for="<%= id %>" class="selectable-btn">
+            <%= answer.content %>
+          </label>
+        <% end %>
+      </div>
+      <div class="text-center">
+        <%= submit_tag "Submit", class: 'submit-btn' %>
+      </div>
     <% end %>
-  </div>
-
-  <%= link_to 'Back to games', games_path, class: 'btn back-btn' %>
+  <% else %>
+    <p class="no-question">No question available.</p>
+  <% end %>
+</div>

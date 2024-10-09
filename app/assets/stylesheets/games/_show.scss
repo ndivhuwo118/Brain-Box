@@ -23,6 +23,10 @@ body {
   border-radius: 15px;
   border: 3px solid #ff4757;
   box-shadow: 0 8px 40px rgba(255, 71, 87, 0.7);
+  min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .question-content {
@@ -63,9 +67,7 @@ body {
 }
 
 .submit-btn {
-  background-color: #d0021b;
-  border: 3px solid #ffcc00;
-  box-shadow: 0 8px 20px rgba(255, 204, 0, 0.8);
+  background-color: #ffcc00;
 }
 
 .submit-btn:hover {
@@ -86,3 +88,55 @@ body {
   background-color: #ffd700;
 }
 
+.answer-btn {
+  display: inline-block;
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #d0021b;
+  border: 2px solid #ffcc00;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.answer-btn:hover {
+  background-color: #ff4757;
+}
+
+.answer-btn:active {
+  background-color: #ffcc00;
+  border-color: #d0021b;
+}
+
+.answer-buttons {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  min-height: 30vh;
+  justify-content: space-evenly;
+}
+
+.hidden-radio {
+  display: none;
+}
+
+.selectable-btn {
+  width: 60%;
+  padding: 10px 20px;
+  background-color: #d0021b;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.selectable-btn:hover {
+  background-color: #975c61;
+}
+
+.hidden-radio:checked + .selectable-btn {
+  background-color: #ffcc00;
+  border-color: #d0021b;
+  color: #d0021b;
+}
