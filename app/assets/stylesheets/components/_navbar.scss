@@ -55,3 +55,32 @@
 .navbar-icon:hover {
   color: #ffd700;
 }
+
+
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background:black;
+  border-bottom: 2px solid #fff;
+  z-index: 999;
+}
+
+.navbar-icon {
+  color: #fff;
+  font-size: 2rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+
+  img {
+    height: 60px;
+    width: 60px;
+  }
+}
+
+
+
+.navbar-icon:hover {
+  color: #ffcc00;
+}

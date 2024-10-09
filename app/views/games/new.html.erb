@@ -31,16 +31,6 @@
     </a>
 </div>
 
-<!-- Navbar -->
-<div class="navbar boxing-navbar">
-  <a href="#games" class="navbar-icon">
-    <i class="fas fa-gamepad"></i> Games
-  </a>
-  <a href="#messages" class="navbar-icon">
-    <i class="fa-solid fa-message"></i> Messages
-  </a>
-</div>
-
 <%= link_to 'Back to games', games_path, class: 'btn back-btn' %>
 
 <!-- JavaScript for Challenger Search -->
@@ -69,11 +59,7 @@
               userDiv.onclick = function() {
                 searchInput.value = user.name;
                 resultsDiv.style.display = 'none';
-<<<<<<< HEAD
-              };
-=======
               }
->>>>>>> 6b516d0250b222d59f4176ba684ab07ec4ede44b
               resultsDiv.appendChild(userDiv);
             });
             resultsDiv.style.display = 'block';
@@ -84,9 +70,3 @@
     });
   });
 </script>
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 6b516d0250b222d59f4176ba684ab07ec4ede44b
