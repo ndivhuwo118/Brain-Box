@@ -1,0 +1,91 @@
+.game-list {
+  max-width: 700px;
+  margin: 0 auto;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.game-list h2 {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.game-list::-webkit-scrollbar {
+  display: none;
+}
+
+.game-card {
+  background: #fff;
+  border: 2px solid #ff4757;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.game-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 25px rgba(255, 71, 87, 0.5);
+}
+
+.game-info, .game-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.6em;
+  padding: 10px;
+}
+
+.player-email {
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0 10px 5px;
+}
+
+.player-score {
+  font-size: 1.5rem;
+  background: red;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(255, 0, 0, 0.8);
+}
+
+.vs {
+  font-size: 2rem;
+  color: #ff4757;
+  text-align: center;
+}
+
+.vs img {
+  height: 80px;
+  width: 80px;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 15px 0;
+}
+
+.new-game {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.winner {
+  background: #02367a;
+  box-shadow: 0 2px 5px rgba(0, 132, 255, 0.8);
+}
+
+.belt {
+  width: 50px;
+}
