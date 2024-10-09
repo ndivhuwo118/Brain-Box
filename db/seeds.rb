@@ -147,48 +147,54 @@ questions_and_answers = {
 # Create questions and answers for each category and round
 # Create questions and answers for each category and round
 puts "Creating questions and answers..."
-categories.each do |category_name|
-  category = Category.find_by(name: category_name)
+rounds = Round.left_joins(:question).where(questions: { id: nil })
+until rounds.empty?
 
-  next unless category # Skip if the category does not exist
+  categories.each do |category_name|
+    category = Category.find_by(name: category_name)
 
-  questions_and_answers[category_name].each do |item|
-    round = Round.all.sample # Randomly assign a round
-    next unless round # Skip if there are no rounds
+    next unless category # Skip if the category does not exist
 
-    question = Question.create!(
-      content: item[:question],
-      round: round
-    )
+    questions_and_answers[category_name].each do |item|
 
-    # Create the correct answer
-    Answer.create!(
-      content: item[:correct_answer],
-      decoy: false, # Correct answer
-      question: question
-    )
+      round = rounds.sample # Randomly assign a round that doesn't have a question yet
+      next unless round # Skip if there are no rounds
 
-    # Gather incorrect answers
-    incorrect_answers = item[:answers].reject { |ans| ans == item[:correct_answer] }
+      question = Question.create!(
+        content: item[:question],
+        round: round
+      )
 
-    # Ensure there are enough valid incorrect answers
-    next if incorrect_answers.length < 3  # Skip if not enough incorrect answers
-
-    # Randomly select three unique decoys
-    selected_decoys = incorrect_answers.sample(3)
-
-    # Create decoy answers
-    selected_decoys.each do |decoy_answer|
-      # Ensure we're not creating nil content
-      next if decoy_answer.nil?
-
+      # Create the correct answer
       Answer.create!(
-        content: decoy_answer,
-        decoy: true, # Incorrect answer
+        content: item[:correct_answer],
+        decoy: false, # Correct answer
         question: question
       )
+
+      # Gather incorrect answers
+      incorrect_answers = item[:answers].reject { |ans| ans == item[:correct_answer] }
+
+      # Ensure there are enough valid incorrect answers
+      next if incorrect_answers.length < 3  # Skip if not enough incorrect answers
+
+      # Randomly select three unique decoys
+      selected_decoys = incorrect_answers.sample(3)
+
+      # Create decoy answers
+      selected_decoys.each do |decoy_answer|
+        # Ensure we're not creating nil content
+        next if decoy_answer.nil?
+
+        Answer.create!(
+          content: decoy_answer,
+          decoy: true, # Incorrect answer
+          question: question
+        )
+      end
     end
   end
+  rounds = Round.left_joins(:question).where(questions: { id: nil })
 end
 
 # Create associations between games and categories
