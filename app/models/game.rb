@@ -7,6 +7,7 @@ class Game < ApplicationRecord
   has_many :rounds
   has_many :game_categories
   has_many :categories, through: :game_categories
+  has_many :questions, through: :rounds
 
   has_many :users, through: :game_players, as: :players
   has_many :players, through: :game_players, source: :user
@@ -50,5 +51,13 @@ class Game < ApplicationRecord
     return User.find(winner.id)
     # Or if the score is the same then the match will be considered a draw
     # Ensure there are players in the game
+  end
+
+  def questions_content
+    string = questions.map do |question|
+      question.content
+    end
+    string.join("; ")
+
   end
 end
