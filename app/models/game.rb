@@ -29,11 +29,15 @@ class Game < ApplicationRecord
 
 
   def current_player
-    self.game_players.find_by(user_id: user.id)
+    game_players.find_by(user_id: user.id)
   end
 
   def opponent_player
     game_players.find_by(user_id: opponent.id)
+  end
+
+  def complete
+    current_player.play_count == rounds.count && opponent_player.play_count == rounds.count
   end
 
   def winner!
@@ -42,13 +46,16 @@ class Game < ApplicationRecord
     if current_player.score > opponent_player.score
       update(winner_id: user.id)
       winner = user
-    else
+      return User.find(winner.id)
+    elsif current_player.score < opponent_player.score
       update(winner_id: opponent.id)
-      return opponent
       winner = opponent
+      return User.find(winner.id)
+    else
+      winner = nil
     end
     # else the opponent will get it
-    return User.find(winner.id)
+
     # Or if the score is the same then the match will be considered a draw
     # Ensure there are players in the game
   end

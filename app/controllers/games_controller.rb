@@ -3,10 +3,22 @@ class GamesController < ApplicationController
 
   def index
     @games = []
-    @game_players = GamePlayer.where(user_id: current_user.id)
-    @game_players.each do |game_player|
-      @games << game_player.game
-    end
+    @games = Game.joins(:game_players).where(game_players: { user_id: current_user.id })
+
+    # games that i havent played
+    @my_games = @games.joins(:rounds)
+                      .group('games.id, game_players.id')
+                      .having('game_players.played = false')
+
+    # games that i played that hasnt been played by the other game player
+    @started_games = @games.joins(:rounds)
+                           .group('games.id, game_players.id')
+                           .having('game_players.play_count < COUNT(rounds.id)')
+
+    # games that i and the other game player have played
+    @complete_games = @games.joins(:rounds)
+                            .group('games.id, game_players.id')
+                            .having('game_players.played = true')
   end
 
   def show
@@ -69,7 +81,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @winner = @game.winner!
   end
-  
+
   private
 
   def set_game
