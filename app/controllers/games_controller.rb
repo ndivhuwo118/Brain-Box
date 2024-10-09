@@ -2,12 +2,21 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show]
 
   def index
-    @games = []
-    @game_players = GamePlayer.where(user_id: current_user.id)
-    @game_players.each do |game_player|
-      @games << game_player.game
-    end
+    @games = Game.joins(:game_players).where(game_players: { user_id: current_user.id })
+
+    @my_games = @games.joins(:game_players)
+                      .group('games.id, game_players.id')
+                      .having('game_players.played = false')
+
+    @started_games = @games.joins(:game_players)
+                           .group('games.id')
+                           .having('SUM(CASE WHEN game_players.user_id <> ? THEN game_players.play_count END) = 0', current_user.id)
+
+    @complete_games = @games.joins(:game_players)
+                            .group('games.id')
+                            .having('SUM(CASE WHEN game_players.played = true THEN 1 END) > 0 AND SUM(CASE WHEN game_players.user_id = ? THEN 1 END) > 0', current_user.id)
   end
+
 
   def show
     @game_players = @game.game_players.includes(:user)
@@ -68,7 +77,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @winner = @game.winner!
   end
-  
+
   private
 
   def set_game

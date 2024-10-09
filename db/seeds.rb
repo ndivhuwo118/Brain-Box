@@ -205,7 +205,7 @@ Game.all.each do |game|
     GamePlayer.create!(
       game: game,
       user: user,
-      score: rand(0..100) # Assign a random score
+      score: rand(0..3) # Assign a random score
     )
   end
 end
