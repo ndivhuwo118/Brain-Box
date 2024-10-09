@@ -7,6 +7,6 @@ class Message < ApplicationRecord
   private
 
   def broadcast_message
-    broadcast_append_to "game_#{game.id}_messages", partial: "messages/message", locals: { message: self }
+    broadcast_append_to "game_#{game.id}_messages", partial: "messages/message", locals: { message: self, user: user }
   end
 end
