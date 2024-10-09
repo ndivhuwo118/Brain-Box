@@ -79,7 +79,9 @@ class GamesController < ApplicationController
 
   def final
     @game = Game.find(params[:id])
+    
     @winner = @game.winner!
+
   end
 
   private
