@@ -1,0 +1,42 @@
+.container {
+  text-align: center;
+  padding: 50px;
+}
+
+h1 {
+  font-size: 4em;
+  color: #f70198;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+}
+
+.play-button-container {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.play-button {
+  font-size: 2em;
+  font-weight: bold;
+  text-transform: uppercase;
+  background: linear-gradient(45deg, #08a5fe, #ff7f50);
+  color: white;
+  padding: 20px 40px; 
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+.play-button:hover {
+  background: linear-gradient(45deg, #ff7f50, #ff4500);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+  transform: translateY(-5px);
+}
+
+.play-button:active {
+  background: linear-gradient(45deg, #ff4500, #ff7f50);
+  transform: translateY(0);
+}

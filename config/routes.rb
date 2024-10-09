@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   resources :games, only: [:index, :show, :new, :create] do
     member do
       post :play
+      get :loading
+      get :results
+      get:final
     end
 
     resources :rounds, only: [:show]
@@ -26,4 +29,5 @@ Rails.application.routes.draw do
   resources :questions do
     post "submit_answer", on: :member
   end
+
 end

@@ -23,7 +23,6 @@ class Question < ApplicationRecord
 
   def set_content
     categories = round.game.categories
-    p categories
 
     client = OpenAI::Client.new
     chatgpt_response = client.chat(parameters: {
