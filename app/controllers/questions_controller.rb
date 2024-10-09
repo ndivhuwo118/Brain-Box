@@ -40,7 +40,6 @@ class QuestionsController < ApplicationController
       redirect_to game_round_path(@game, @next_round)
     else
       @game_player.update(played: true)
-      raise
       # winner! method
       if @game.current_player.played && @game.opponent_player.played
         @game.winner!
