@@ -11,8 +11,9 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @round = @question.round
     @game = @round.game
-    if current_user == @game.current_player
-      @game_player = current_user
+
+    if current_user == @game.current_player.user
+      @game_player = @game.current_player
     else
       @game_player = @game.opponent_player
     end
@@ -28,10 +29,8 @@ class QuestionsController < ApplicationController
 
       @game_player.score += 1
       @game_player.play_count += 1
+      @game_player.save
 
-      if @game_player.save
-        p "score updated"
-      end
     end
 
     @next_round = @game.rounds.find_by(round_number: @round.round_number + 1)
@@ -42,7 +41,7 @@ class QuestionsController < ApplicationController
     else
       @game_player.update(played: true)
       # winner! method
-      if @game_player.played && @game.opponent_player.played
+      if @game.current_player.played && @game.opponent_player.played
         @game.winner!
         Turbo::StreamsChannel.broadcast_update_to(
           "winner_game_#{@game.id}",

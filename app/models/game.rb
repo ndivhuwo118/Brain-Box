@@ -24,7 +24,7 @@ class Game < ApplicationRecord
   end
 
   def current_player
-    game_players.find_by(user_id: user.id)
+    self.game_players.find_by(user_id: user.id)
   end
 
   def opponent_player
