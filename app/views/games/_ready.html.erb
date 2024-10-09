@@ -1,0 +1,10 @@
+<div id="<%= dom_id(game) %>" class="game-container">
+  <%= turbo_stream_from dom_id(game) %>
+
+  <% if game.rounds.any? %>
+    <%= link_to "Play", game_round_path(game, game.rounds.first), class: "play-button" %>
+  <% else %>
+    <%= image_tag 'warmup', class: 'ready-image' %>
+  <% end % %>
+</div>
+
