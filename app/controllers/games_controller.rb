@@ -2,21 +2,24 @@ class GamesController < ApplicationController
   before_action :set_game, only: [:show]
 
   def index
+    @games = []
     @games = Game.joins(:game_players).where(game_players: { user_id: current_user.id })
 
-    @my_games = @games.joins(:game_players)
+    # games that i havent played
+    @my_games = @games.joins(:rounds)
                       .group('games.id, game_players.id')
                       .having('game_players.played = false')
 
-    @started_games = @games.joins(:game_players)
-                           .group('games.id')
-                           .having('SUM(CASE WHEN game_players.user_id <> ? THEN game_players.play_count END) = 0', current_user.id)
+    # games that i played that hasnt been played by the other game player
+    @started_games = @games.joins(:rounds)
+                           .group('games.id, game_players.id')
+                           .having('game_players.play_count < COUNT(rounds.id)')
 
-    @complete_games = @games.joins(:game_players)
-                            .group('games.id')
-                            .having('SUM(CASE WHEN game_players.played = true THEN 1 END) > 0 AND SUM(CASE WHEN game_players.user_id = ? THEN 1 END) > 0', current_user.id)
+    # games that i and the other game player have played
+    @complete_games = @games.joins(:rounds)
+                            .group('games.id, game_players.id')
+                            .having('game_players.played = true')
   end
-
 
   def show
     @game_players = @game.game_players.includes(:user)
