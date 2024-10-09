@@ -12,6 +12,12 @@ class QuestionsController < ApplicationController
     @round = @question.round
     @game = @round.game
 
+    if current_user == @game.current_player.user
+      @game_player = @game.current_player
+    else
+      @game_player = @game.opponent_player
+    end
+
     selected_answer = Answer.find(params[:answer_id])
 
     @question.answers.each do |answer|
@@ -20,12 +26,11 @@ class QuestionsController < ApplicationController
 
     # Update the game state based on the selected answer
     if selected_answer == @correct_answer
-      @game_player = @game.game_players.find_by(user: current_user)
-      @game_player.score += 1
 
-      if @game_player.save
-        p "score updated"
-      end
+      @game_player.score += 1
+      @game_player.play_count += 1
+      @game_player.save
+
     end
 
     @next_round = @game.rounds.find_by(round_number: @round.round_number + 1)
@@ -34,9 +39,17 @@ class QuestionsController < ApplicationController
     if @next_round
       redirect_to game_round_path(@game, @next_round)
     else
+      @game_player.update(played: true)
       # winner! method
-      @game.winner!
-      redirect_to games_path
+      if @game.current_player.played && @game.opponent_player.played
+        @game.winner!
+        Turbo::StreamsChannel.broadcast_update_to(
+          "winner_game_#{@game.id}",
+          target: "winner_game_#{@game.id}",
+          partial: "games/winner", locals: { game: @game }
+        )
+      end
+      redirect_to results_game_path(@game)
     end
   end
 end

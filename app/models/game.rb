@@ -23,13 +23,17 @@ class Game < ApplicationRecord
     rounds.order(:round_number).last
   end
 
+  def current_player
+    self.game_players.find_by(user_id: user.id)
+  end
+
+  def opponent_player
+    game_players.find_by(user_id: opponent.id)
+  end
+
   def winner!
     # self.game_players
     # if the current user of the game wins, they will be assigned the winner_id
-    current_player = game_players.find_by(user_id: user.id)
-    opponent_player = game_players.find_by(user_id: opponent.id)
-    p current_player
-
     if current_player.score > opponent_player.score
       update(winner_id: user.id)
       winner = user

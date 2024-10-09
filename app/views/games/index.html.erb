@@ -1,5 +1,5 @@
 <div class="game-list">
-<h2>You haven't thrown a punch</h2>
+  <h2>You haven't thrown a punch</h2>
   <% @games.each do |game| %>
     <% if game.game_players.first.score == 0 && game.game_players.second.score == 0 %>
       <div class="game-card boxing-card">
@@ -8,7 +8,6 @@
             <span class="player-email"><%= game.game_players.first.user.nickname %></span>
             <span class="player-score"><%= game.game_players.first.score %></span>
           </div>
-
 
           <span class="vs">
             <%= link_to 'Play Now', game_round_path(game, game.rounds.first), class: 'btn boxing-btn', role: 'button' %>
@@ -30,14 +29,15 @@
       <div class="game-card boxing-card">
         <div class="game-info">
           <div class="player">
-           <%= image_tag 'belt', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
+            <%= image_tag 'belt', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
+            <%= image_tag 'ko', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
             <span class="player-email"><%= game.game_players.first.user.nickname %></span>
             <span class="player-score <%= "winner" if game.game_players.first.score > game.game_players.second.score%>"><%= game.game_players.first.score %></span>
           </div>
           <span class="vs"><%= image_tag "boxing-gloves" %></span>
           <div class="player">
-          <%= image_tag 'belt', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
-            <%= image_tag'ko', class:"belt" %>
+            <%= image_tag 'belt', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
+            <%= image_tag 'ko', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
             <span class="player-email"><%= game.game_players.second.user.nickname %></span>
             <span class="player-score <%= "winner" if game.game_players.first.score < game.game_players.second.score%>"><%= game.game_players.second.score %></span>
           </div>
