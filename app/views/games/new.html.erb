@@ -1,16 +1,16 @@
 <h1>Step into the ring</h1>
+
 <%= simple_form_for(@game) do |f| %>
   <div class="field">
     <%= f.input :user_id,
           label: "Challenger",
-          as: :string,
+          as: :select,
+          collection: @users,
           input_html: {
             id: 'challenger-search',
-            placeholder: 'search opponent',
             class: 'form-control'
-          }
-    %>
-    <div id="challenger-results" style="display: none;"></div>
+          },
+          include_blank: 'Search and select opponent' %>
   </div>
 
   <div class="field">
@@ -22,3 +22,39 @@
   </div>
 <% end %>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('challenger-search');
+    const resultsDiv = document.getElementById('challenger-results');
+
+    searchInput.addEventListener('input', function() {
+      const query = searchInput.value;
+
+      if (query.length < 2) {
+        resultsDiv.style.display = 'none';
+        return;
+      }
+
+      fetch(`/users/search?query=${query}`)
+        .then(response => response.json())
+        .then(data => {
+          resultsDiv.innerHTML = '';
+          if (data.length) {
+            data.forEach(user => {
+              const userDiv = document.createElement('div');
+              userDiv.textContent = user.name;
+              userDiv.classList.add('dropdown-item');
+              userDiv.onclick = function() {
+                searchInput.value = user.name;
+                resultsDiv.style.display = 'none';
+              };
+              resultsDiv.appendChild(userDiv);
+            });
+            resultsDiv.style.display = 'block';
+          } else {
+            resultsDiv.style.display = 'none';
+          }
+        });
+    });
+  });
+</script>
