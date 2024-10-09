@@ -11,6 +11,9 @@ class Game < ApplicationRecord
   has_many :users, through: :game_players, as: :players
   has_many :players, through: :game_players, source: :user
 
+  has_many :messages, dependent: :destroy
+  belongs_to :user
+
   def seeding?
     ENV['SEEDING'] == 'true'
   end
@@ -22,6 +25,7 @@ class Game < ApplicationRecord
   def current_round
     rounds.order(:round_number).last
   end
+
 
   def current_player
     self.game_players.find_by(user_id: user.id)
