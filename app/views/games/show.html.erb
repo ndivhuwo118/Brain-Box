@@ -1,3 +1,17 @@
 <%= button_to "Play", play_game_path(@game), class: "btn btn-primary"  %>
 <%# <p>Opponent <%= @game.opponent.nickname %></p>
 <p>Categories: <%= @game.categories.map(&:name).join(", ") %></p>
+
+<%= turbo_stream_from "game_#{@game.id}_messages" %>
+
+
+<div id="messages" class="messages">
+  <% @game.messages.each do |message| %>
+    <%= render "messages/message", message: message, user: current_user %>
+  <% end %>
+</div>
+
+<%= simple_form_for [@game, @message], html: { class: "d-flex", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
+  <%= f.input :content, label: false, placeholder: "Message the players", wrapper_html: { class: "flex-grow-1" } %>
+  <%= f.submit "Send", class: "btn btn-primary mb-3" %>
+<% end %>

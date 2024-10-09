@@ -7,9 +7,13 @@ class Game < ApplicationRecord
   has_many :rounds
   has_many :game_categories
   has_many :categories, through: :game_categories
+  has_many :questions, through: :rounds
 
   has_many :users, through: :game_players, as: :players
   has_many :players, through: :game_players, source: :user
+
+  has_many :messages, dependent: :destroy
+  belongs_to :user
 
   def seeding?
     ENV['SEEDING'] == 'true'
@@ -22,6 +26,7 @@ class Game < ApplicationRecord
   def current_round
     rounds.order(:round_number).last
   end
+
 
   def current_player
     game_players.find_by(user_id: user.id)
@@ -53,5 +58,13 @@ class Game < ApplicationRecord
 
     # Or if the score is the same then the match will be considered a draw
     # Ensure there are players in the game
+  end
+
+  def questions_content
+    string = questions.map do |question|
+      question.content
+    end
+    string.join("; ")
+
   end
 end

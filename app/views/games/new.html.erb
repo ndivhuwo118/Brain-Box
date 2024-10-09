@@ -1,65 +1,24 @@
-<h1 class="text-center title">Step into the Ring</h1>
-
-<div class="form-container boxing-form-container">
-  <%= simple_form_for(@game) do |f| %>
-    <!-- Challenger Search -->
-    <div class="form-group">
-      <%= f.label :user_id, "Choose Your Challenger", class: 'form-label' %>
-      <%= f.input :user_id, collection: @users, input_html: { class: 'form-control', id: 'challenger-search', placeholder: 'Type to search...' } %>
-      <div id="challenger-results" class="dropdown-menu"></div>
-    </div>
-
-    <!-- Categories in Grid -->
-    <div class="form-group">
-      <%= f.label :category_ids, "Select Categories", class: 'form-label' %>
-      <div class="grid-container">
-        <%= f.input :category_ids, collection: @categories, as: :check_boxes, label_method: :name, input_html: { class: 'category-checkbox' }, item_wrapper_class: 'category-item' %>
-      </div>
-    </div>
-
-    <!-- Submit Button -->
-    <div class="form-group">
-      <%= f.submit 'Let\'s Fight!', class: 'btn fight-btn w-100' %>
-    </div>
-  <% end %>
-</div>
-
-<%= link_to 'Back to games', games_path, class: 'btn back-btn' %>
-
-<!-- JavaScript for Challenger Search -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('challenger-search');
-    const resultsDiv = document.getElementById('challenger-results');
-
-    searchInput.addEventListener('input', function() {
-      const query = searchInput.value;
-
-      if (query.length < 2) {
-        resultsDiv.style.display = 'none';
-        return;
-      }
-
-      fetch(`/users/search?query=${query}`)
-        .then(response => response.json())
-        .then(data => {
-          resultsDiv.innerHTML = '';
-          if (data.length) {
-            data.forEach(user => {
-              const userDiv = document.createElement('div');
-              userDiv.textContent = user.name;
-              userDiv.classList.add('dropdown-item');
-              userDiv.onclick = function() {
-                searchInput.value = user.name;
-                resultsDiv.style.display = 'none';
-              }
-              resultsDiv.appendChild(userDiv);
-            });
-            resultsDiv.style.display = 'block';
-          } else {
-            resultsDiv.style.display = 'none';
+<h1>Step into the ring</h1>
+<%= simple_form_for(@game) do |f| %>
+  <div class="field">
+    <%= f.input :user_id,
+          label: "Challenger",
+          as: :string,
+          input_html: {
+            id: 'challenger-search',
+            placeholder: 'search opponent',
+            class: 'form-control'
           }
-        });
-    });
-  });
-</script>
+    %>
+    <div id="challenger-results" style="display: none;"></div>
+  </div>
+
+  <div class="field">
+    <%= f.input :category_ids, collection: @categories, as: :check_boxes, label: "Select Categories" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+

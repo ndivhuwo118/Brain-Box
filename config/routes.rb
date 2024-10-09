@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :games, only: [:index, :show, :new, :create] do
+    resources :messages, only: :create
     member do
       post :play
       get :loading
@@ -25,9 +26,15 @@ Rails.application.routes.draw do
 
     resources :users, only: [:show]
 
+
   end
   resources :questions do
     post "submit_answer", on: :member
+  end
+  resources :users, only: [] do
+    collection do
+      get :search
+    end
   end
 
 end

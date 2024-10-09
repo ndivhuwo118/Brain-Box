@@ -24,6 +24,7 @@ class GamesController < ApplicationController
   def show
     @game_players = @game.game_players.includes(:user)
     @rounds = @game.rounds.includes(:questions)
+    @message = Message.new
   end
 
   def new

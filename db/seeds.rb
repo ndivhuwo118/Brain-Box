@@ -24,6 +24,8 @@ user_emails = [
   "leo@gmail.com",
   "finn@gmail.com",
   "juno@gmail.com",
+  "mmanare@gmail.com",
+  "janet@gmail.com"
 ]
 
 user_nicknames = [
@@ -36,7 +38,9 @@ user_nicknames = [
   "kai",
   "leo",
   "finn",
-  "juno"
+  "juno",
+  "mmanare",
+  "janet"
 
 ]
 
