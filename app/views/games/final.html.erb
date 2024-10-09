@@ -1,3 +1,11 @@
 <div class="results-container">
+<% if @winner.nil? %>
+<!--style for draw-->
+<% elsif @winner == current_user %>
+<!--style for 'you won'-->
+<% else %>
+<!--style for 'you lost'-->
   <h1><%= @winner.nickname %> won!</h1>
+
+<% end %>
 </div>

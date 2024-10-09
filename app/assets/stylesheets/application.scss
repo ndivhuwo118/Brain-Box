@@ -11,11 +11,3 @@
 @import "components/index";
 @import "pages/index";
 @import "games/index";
-@import "games/new";
-@import "games/loading";
-@import "games/ready";
-
-body {
-  height: calc(100vh - 103px);
-  overflow-y: scroll;
-}
