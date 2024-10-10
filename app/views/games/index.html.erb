@@ -1,5 +1,4 @@
 
-
 <div class="game-list">
   <h2>You haven't thrown a punch</h2>
   <% @my_games.each do |game| %>
@@ -24,21 +23,21 @@
 
   <h2>Waiting for punch </h2>
   <% @started_games.each do |game| %>
-      <div class="game-card boxing-card">
-        <div class="game-info">
-          <div class="player">
-            <span class="player-email"><%= game.game_players.first.user.nickname %></span>
-            <span class="player-score"><%= game.game_players.first.score %></span>
-          </div>
+    <div class="game-card boxing-card">
+      <div class="game-info">
+        <div class="player">
+          <span class="player-email"><%= game.game_players.first.user.nickname %></span>
+          <span class="player-score"><%= game.game_players.first.score %></span>
+        </div>
 
-          <span class="vs"><%= image_tag "boxing-gloves" %></span>
+        <span class="vs"><%= image_tag "boxing-gloves" %></span>
 
-          <div class="player">
-            <span class="player-email"><%= game.game_players.second.user.nickname %></span>
-            <span class="player-score"><%= game.game_players.second.score %></span>
-          </div>
+        <div class="player">
+          <span class="player-email"><%= game.game_players.second.user.nickname %></span>
+          <span class="player-score"><%= game.game_players.second.score %></span>
         </div>
       </div>
+    </div>
   <% end %>
 
   <h2>Match over</h2>
