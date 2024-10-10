@@ -3,7 +3,7 @@
   <% if game.complete? %>
     <%= link_to 'The champion is..', final_game_path(game), class: 'btn btn-danger', role: 'button' %>
   <% else  %>
-    <h1>Waiting for your opponent to strike</h1>
+    <h3>Waiting for your opponent to strike...</h3>
   <% end %>
   <%# raise %>
 </div>

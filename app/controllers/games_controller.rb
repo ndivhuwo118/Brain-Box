@@ -59,7 +59,7 @@ class GamesController < ApplicationController
     if @game.save
       GamePlayer.create!(game: @game, user: current_user)
       GamePlayer.create!(game: @game, user: @opponent)
-      redirect_to loading_game_path(@game), notice: 'Game was successfully created.'
+      redirect_to loading_game_path(@game)
     else
       render :new
     end

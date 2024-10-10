@@ -1,27 +1,23 @@
-<h1>Step into the ring</h1>
-
+<h1 class="text-center">Step into the ring</h1>
 <div class="game-card">
-  <div class="game-new">
-
+  <div class="new-game-container">
     <%= simple_form_for(@game) do |f| %>
       <div class="field">
         <%= f.input :user_id,
-          label: "Challenger",
-          as: :select,
-          collection: @users,
-          input_html: {
-            id: 'challenger-search',
-            class: 'form-control'
-          },
-          include_blank: 'Search and select opponent' %>
+            label: "Challenger",
+            as: :select,
+            collection: @users,
+            input_html: {
+              id: 'challenger-search',
+              class: 'form-control text-center'
+            },
+            include_blank: 'Select opponent' %>
       </div>
-
       <div class="field">
         <%= f.input :category_ids, collection: @categories, as: :check_boxes, label: "Select Categories" %>
       </div>
-
-      <div class="actions">
-        <%= f.submit %>
+      <div class="actions text-center">
+        <%= f.submit "FIGHT", class: "btn submit-btn" %>
       </div>
     <% end %>
   </div>
