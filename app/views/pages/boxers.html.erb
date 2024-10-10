@@ -1,0 +1,13 @@
+<h1>All Boxers</h1>
+
+<div class="boxers-container">
+  <% @boxers.each do |boxer| %>
+    <div class="game-card">
+      <div class="game-info boxer">
+      <%= image_tag "/boxing-gloves.png", class:"avatar" %>
+      <p><%= boxer.nickname %></p>
+      <p>5</p>
+      </div>
+    </div>
+  <% end %>
+</div>
