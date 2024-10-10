@@ -1,10 +1,15 @@
 <div class="results-container">
-  <h1>Your results</h1>
+  <h1 class="text-center">Game over</h1>
+  <h2>You answered</h2>
+  <h2><%= @score %> / <%= @rounds %> </h2>
 
-  <h1><%= @score %> / <%= @rounds %> questions</h1>
-
-  <h1>Correctly</h1>
-
+  <h2>questions correctly</h2>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
   <%= render 'winner', game: @game %>
 
 </div>
