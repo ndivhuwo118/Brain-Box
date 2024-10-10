@@ -1,12 +1,25 @@
-<div class="results-container">
+<div class="results-container text-center">
   <% if @winner.nil? %>
-  <!--style for draw-->
+    <!--style for draw-->
     <h1>It's a draw!</h1>
   <% elsif @winner == current_user %>
     <h1>You won!</h1>
-  <!--style for 'you won'-->
+    <!--style for 'you won'-->
   <% else %>
-  <!--style for 'you lost'-->
+    <!--style for 'you lost'-->
     <h1><%= @winner.nickname %> won!</h1>
   <% end %>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h2>Your total score </h2>
+  <h2>is now</h2>
+  <h2><%= current_user.total_score %></h2>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <h3>Ready for another round?</h3>
 </div>

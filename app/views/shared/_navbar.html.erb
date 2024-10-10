@@ -1,6 +1,4 @@
-
 <div class="navbar">
-
   <% if current_user %>
     <%= link_to games_path, class:"navbar-icon" do %>
       <i class="fas fa-gamepad"></i>
@@ -8,19 +6,10 @@
     <%= link_to new_game_path, class: "navbar-icon" do %>
       <%= image_tag 'punching' %>
     <% end %>
-
-    <a href="#messages" class="navbar-icon">
+    <%= link_to boxers_path, class:"navbar-icon" do %>
       <i class="fa-solid fa-user-group"></i>
-    </a>
- <%= image_tag url_for(current_user.avatar),class:'github' %>
-    <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
-
-
+    <% end %>
   <% else %>
-
-  <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-
-
-
+    <%= link_to "Login", new_user_session_path, class: "nav-link" %>
   <% end %>
 </div>
