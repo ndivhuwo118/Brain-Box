@@ -25,8 +25,7 @@ Rails.application.routes.draw do
     resources :rounds, only: [:show]
 
     resources :users, only: [:show]
-    
-    get "boxers", to: "pages#boxers"
+
 
 
   end
@@ -38,5 +37,6 @@ Rails.application.routes.draw do
       get :search
     end
   end
-
+  get "boxers", to: "pages#boxers"
+  get "boxers/:nickname", to: "users#show"
 end
