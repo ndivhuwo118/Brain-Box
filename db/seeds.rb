@@ -214,7 +214,7 @@ end
 # Create game players for each game
 puts "Creating game players..."
 Game.all.each do |game|
-  User.all.sample(2).each do |user|
+  [game.user, User.find(game.opponent_id)].each do |user|
     GamePlayer.create!(
       game: game,
       user: user,

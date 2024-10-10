@@ -50,8 +50,8 @@
     <a href="#messages" class="navbar-icon">
       <i class="fa-solid fa-message"></i>
     </a>
- <%= image_tag url_for(current_user.avatar),class:'github' %>
-    <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+ <%#= image_tag url_for(current_user.avatar),class:'github' %>
+<!---->    <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
 
   <% else %>
 
@@ -61,3 +61,4 @@
 
   <% end %>
 </div>
+

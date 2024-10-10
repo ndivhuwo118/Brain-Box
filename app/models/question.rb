@@ -5,9 +5,7 @@ class Question < ApplicationRecord
 
   accepts_nested_attributes_for :answers
 
-
   private
-
 
   def seeding?
     ENV['SEEDING'] == 'true'
@@ -19,7 +17,7 @@ class Question < ApplicationRecord
     client = OpenAI::Client.new
     chatgpt_response = client.chat(parameters: {
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: "Give me an interesting quiz question in the category of #{categories.sample.name}. Give me only the text of the question, without any of your own answer like 'Here is a simple question'. Please make a question unique to the previous questions. Here are the other questions: #{round.game.questions_content}"}]
+      messages: [{ role: "user", content: "Give me a concise and interesting quiz question in the category of #{categories.sample.name}. Give me only the text of the question, without any of your own answer like 'Here is a simple question'. Please make a question unique to the previous questions. Here are the other questions: #{round.game.questions_content}"}]
     })
     new_content = chatgpt_response["choices"][0]["message"]["content"]
 
@@ -29,7 +27,7 @@ class Question < ApplicationRecord
     answer1_response = client.chat(parameters: {
       model: "gpt-4o-mini",
       messages: [
-        { role: "user", content: "For the question: '#{content}', provide an incorrect answer. Do not include any additional text or methods" }
+        { role: "user", content: "For the question: '#{content}', provide an incorrect but plausible answer. Ensure the answer does not repeat phrasing from the question. Do not include any additional text or methods" }
       ]
     })
 
@@ -38,7 +36,7 @@ class Question < ApplicationRecord
     answer2_response = client.chat(parameters: {
       model: "gpt-4o-mini",
       messages: [
-        { role: "user", content: "For the question: '#{content}', provide an incorrect answer. Make it different to this incorrect answer: #{answer1}.Do not include any additional text or methods" }
+        { role: "user", content: "For the question: '#{content}', provide an incorrect but plausible answer. Make it different to this incorrect answer: #{answer1} and ensure the answer does not repeat phrasing from the question or previous answers. Do not include any of the question text or additional text or methods" }
       ]
     })
 
@@ -48,19 +46,16 @@ class Question < ApplicationRecord
     answer4_response = client.chat(parameters: {
       model: "gpt-4o-mini",
       messages: [
-        { role: "user", content: "For the question: '#{content}', provide a one correct answer. Do not include any additional text or methods. These are the incorrect answers: #{answer1}, #{answer2}. Provide the correct answer in the same format as the incorrect ones" }
+        { role: "user", content: "For the question: '#{content}', provide a one correct answer. Do not include any additional text or methods. These are the incorrect answers: #{answer1}, #{answer2} ensure the answer does not repeat phrasing from the question or previous answers. Provide the correct answer in the same format as the incorrect ones" }
       ]
     })
 
     answer4 = answer4_response["choices"][0]["message"]["content"]
 
-
     # Create answers for the question
     Answer.create(question_id: self.id, content: answer1, decoy: true)
     Answer.create( question_id: self.id, content: answer2, decoy: true)
     Answer.create( question_id: self.id, content: answer4, decoy: false)
-
-
 
   end
 end
