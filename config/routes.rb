@@ -19,12 +19,14 @@ Rails.application.routes.draw do
       post :play
       get :loading
       get :results
-      get:final
+      get :final
     end
 
     resources :rounds, only: [:show]
 
     resources :users, only: [:show]
+    
+    get "boxers", to: "pages#boxers"
 
 
   end
