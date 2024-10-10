@@ -1,4 +1,5 @@
 # Clear existing data to ensure a fresh start
+require "open-uri"
 ENV['SEEDING'] = 'true'
 puts "Clearing existing data..."
 GameCategory.destroy_all
@@ -17,35 +18,37 @@ user_emails = [
   "david@gmail.com",
   "darian@gmail.com",
   "ndi@gmail.com",
-  "skylar@gmail.com",
-  "mav@gmail.com",
-  "riley@gmail.com",
-  "kai@gmail.com",
-  "leo@gmail.com",
-  "finn@gmail.com",
-  "juno@gmail.com",
-  "mmanare@gmail.com",
-  "janet@gmail.com"
+   "kiki@gmail.com",
+   "megan@gmail.com",
+   "janet@gmail.com",
+   "mmanare@gmail.com",
+   "ajmal@gmail.com",
+   "christain@gmail.com"
+  # "prince@gmail.com"
+
 ]
 
 user_nicknames = [
-  "jr",
-  "darian",
-  "ndivo",
-  "skylar",
-  "mav",
-  "riley",
-  "kai",
-  "leo",
-  "finn",
-  "juno",
-  "mmanare",
-  "janet"
+  "Davidjunior1991",
+  "dariancpt",
+  "ndivhuwo118",
+   "KIKMAKER",
+   "meganjstreet",
+    "Jaynettt",
+   "mmanare-mahlatse",
+   "ajmalonly",
+  "cbongard90"
+  #  "azaniamzolisa"
+
 
 ]
 
 user_emails.each_with_index do |email, index|
-  User.create!(email: email, password: "password123", nickname: user_nicknames[index])
+ user =  User.create!(email: email, password: "password123", nickname: user_nicknames[index])
+ user_avatar = URI.open("https://kitt.lewagon.com/placeholder/users/#{user.nickname}")
+ p "https://kitt.lewagon.com/placeholder/users/#{user.nickname}"
+ user.avatar.attach(io: user_avatar, filename: "#{user.nickname}.jpeg", content_type: "image/jpeg")
+user.save
 end
 
 # Create sample categories
