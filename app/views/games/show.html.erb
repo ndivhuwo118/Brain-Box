@@ -3,8 +3,6 @@
 <p>Categories: <%= @game.categories.map(&:name).join(", ") %></p>
 
 <%= turbo_stream_from "game_#{@game.id}_messages" %>
-
-
 <div id="messages" class="messages">
   <% @game.messages.each do |message| %>
     <%= render "messages/message", message: message, user: current_user %>
