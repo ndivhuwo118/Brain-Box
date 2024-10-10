@@ -36,6 +36,7 @@
 
 .submit-btn:hover {
   background-color: black;
+  border: 3px solid black;
 }
 
 .back-btn {
@@ -92,4 +93,15 @@
   background-color: $light-blue;
   border-color: $light-blue;
   color: $dark-blue;
+}
+
+
+.play-now-btn {
+  padding: 8px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+    background-color: #015a86;
 }

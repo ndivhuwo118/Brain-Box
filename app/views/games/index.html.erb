@@ -6,16 +6,18 @@
       <div class="game-info">
         <div class="player">
 
-          <span class="player-email"><%= game.game_players.first.user.nickname %><%= image_tag url_for(game.game_players.first.user.avatar),class:'githubsmall' %></span>
+          <span class="player-email"><%= game.game_players.first.user.nickname %></span>
+          <%= image_tag url_for(game.game_players.first.user.avatar),class:'githubsmall' %>
           <span class="player-score"><%= game.game_players.first.score %></span>
         </div>
 
         <span class="vs">
-          <%= link_to 'Play Now', game_round_path(game, game.rounds.first), class: 'btn boxing-btn', role: 'button' %>
+          <%= link_to 'Play Now', game_round_path(game, game.rounds.first), class: 'btn play-now-btn', role: 'button' %>
         </span>
 
         <div class="player">
-          <span class="player-email"><%= game.game_players.second.user.nickname %><%= image_tag url_for(game.game_players.second.user.avatar),class:'githubsmall' %></span>
+          <span class="player-email"><%= game.game_players.second.user.nickname %></span>
+          <%= image_tag url_for(game.game_players.second.user.avatar),class:'githubsmall' %>
           <span class="player-score"><%= game.game_players.second.score %></span>
         </div>
       </div>
@@ -29,6 +31,7 @@
       <div class="game-info">
         <div class="player">
           <span class="player-email"><%= game.game_players.first.user.nickname %></span>
+          <%= image_tag url_for(game.game_players.first.user.avatar),class:'githubsmall' %>
           <span class="player-score"><%= game.game_players.first.score %></span>
         </div>
 
@@ -38,6 +41,7 @@
 
         <div class="player">
           <span class="player-email"><%= game.game_players.second.user.nickname %></span>
+          <%= image_tag url_for(game.game_players.second.user.avatar),class:'githubsmall' %>
           <span class="player-score"><%= game.game_players.second.score %></span>
 
         </div>
