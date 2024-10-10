@@ -22,8 +22,9 @@
 }
 
 .question-content {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   margin-bottom: 15px;
+  color: $dark-blue;
 }
 
 .answer-list {
@@ -48,7 +49,7 @@
 }
 
 .btn {
-  padding: 8px;
+  padding: 2px;
   font-size: 0.8rem;
   border-radius: 8px;
   text-transform: uppercase;

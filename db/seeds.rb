@@ -214,31 +214,36 @@ end
 # Create game players for each game
 puts "Creating game players..."
 Game.all.each do |game|
-  User.all.sample(2).each do |user|
-    GamePlayer.create!(
-      game: game,
-      user: user,
-      score: rand(0..3) # Assign a random score
-    )
-  end
+  GamePlayer.create!(
+    game: game,
+    user: game.user,
+    score: rand(0..3) ,
+    played: [true, false].sample
+  )
+  GamePlayer.create!(
+    game: game,
+    user: game.opponent,
+    score: rand(0..3),
+    played: [true, false].sample
+  )
 end
 
 # Create player answers based on their game participation
-puts "Creating player answers..."
-GamePlayer.all.each do |game_player|
-  Round.all.sample(1).each do |round|
-    Question.where(round: round).each do |question|
-      Answer.where(question: question).sample(1).each do |answer|
-        PlayersAnswer.create!(
-          answer: answer,
-          user: game_player.user,
-          correct: !answer.decoy, # Check if the answer is correct
-          round_id: round.id
-        )
-      end
-    end
-  end
-end
+# puts "Creating player answers..."
+# GamePlayer.all.each do |game_player|
+#   Round.all.sample(1).each do |round|
+#     Question.where(round: round).each do |question|
+#       Answer.where(question: question).sample(1).each do |answer|
+#         PlayersAnswer.create!(
+#           answer: answer,
+#           user: game_player.user,
+#           correct: !answer.decoy, # Check if the answer is correct
+#           round_id: round.id
+#         )
+#       end
+#     end
+#   end
+# end
 
 puts "Seeding complete!"
 ENV['SEEDING'] = 'true'
