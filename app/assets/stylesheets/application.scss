@@ -11,3 +11,8 @@
 @import "components/index";
 @import "pages/index";
 @import "games/index";
+
+body {
+  height: calc(100vh - 170px);
+  overflow-y: scroll;
+}
