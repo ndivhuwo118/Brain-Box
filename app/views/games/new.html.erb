@@ -1,8 +1,11 @@
 <h1>Step into the ring</h1>
 
-<%= simple_form_for(@game) do |f| %>
-  <div class="field">
-    <%= f.input :user_id,
+<div class="game-card">
+  <div class="game-new">
+
+    <%= simple_form_for(@game) do |f| %>
+      <div class="field">
+        <%= f.input :user_id,
           label: "Challenger",
           as: :select,
           collection: @users,
@@ -11,50 +14,15 @@
             class: 'form-control'
           },
           include_blank: 'Search and select opponent' %>
+      </div>
+
+      <div class="field">
+        <%= f.input :category_ids, collection: @categories, as: :check_boxes, label: "Select Categories" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.input :category_ids, collection: @categories, as: :check_boxes, label: "Select Categories" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('challenger-search');
-    const resultsDiv = document.getElementById('challenger-results');
-
-    searchInput.addEventListener('input', function() {
-      const query = searchInput.value;
-
-      if (query.length < 2) {
-        resultsDiv.style.display = 'none';
-        return;
-      }
-
-      fetch(`/users/search?query=${query}`)
-        .then(response => response.json())
-        .then(data => {
-          resultsDiv.innerHTML = '';
-          if (data.length) {
-            data.forEach(user => {
-              const userDiv = document.createElement('div');
-              userDiv.textContent = user.name;
-              userDiv.classList.add('dropdown-item');
-              userDiv.onclick = function() {
-                searchInput.value = user.name;
-                resultsDiv.style.display = 'none';
-              };
-              resultsDiv.appendChild(userDiv);
-            });
-            resultsDiv.style.display = 'block';
-          } else {
-            resultsDiv.style.display = 'none';
-          }
-        });
-    });
-  });
-</script>
+</div>
