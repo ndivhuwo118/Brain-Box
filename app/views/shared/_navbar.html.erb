@@ -1,8 +1,8 @@
 <!--<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%#= link_to root_path, class: "navbar-brand" do %>-->
-      <%#= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
-    <%# end %>
+<%#= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+<%# end %>
 <!--
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -12,7 +12,7 @@
       <ul class="navbar-nav me-auto">
         <%# if user_signed_in? %>-->
 <!--          <li class="nav-item active">-->
-            <%#= link_to "Games", games_path, class: "nav-link" %>
+<%#= link_to "Games", games_path, class: "nav-link" %>
 <!--          </li>
           <li class="nav-item">
             <%#= link_to "Messages", "#", class: "nav-link" %>-->
@@ -24,29 +24,35 @@
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%#= link_to "Action", "#", class: "dropdown-item" %>-->
-              <%#= link_to "Another action", "#", class: "dropdown-item" %>
-              <%#= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+<%#= link_to "Another action", "#", class: "dropdown-item" %>
+<%#= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
 <!--            </div>
           </li>
         <%# else %>-->
 <!--          <li class="nav-item">-->
-          <%#= link_to "Login", new_user_session_path, class: "nav-link" %>
+<%#= link_to "Login", new_user_session_path, class: "nav-link" %>
 <!--          </li>-->
-        <%# end %>
+<%# end %>
 <!--      </ul>
     </div>
   </div>
 </div>-->
 
-
 <div class="navbar">
-  <%= link_to games_path, class:"navbar-icon" do %>
-    <i class="fas fa-gamepad"></i>
+  <% if current_user %>
+    <%= link_to games_path, class:"navbar-icon" do %>
+      <i class="fas fa-gamepad"></i>
+    <% end %>
+    <%= link_to new_game_path, class: "navbar-icon" do %>
+      <%= image_tag 'punching' %>
+    <% end %>
+    <a href="#messages" class="navbar-icon">
+      <i class="fa-solid fa-message"></i>
+    </a>
+    <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
+
+  <% else %>
+    <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+
   <% end %>
-  <%= link_to new_game_path, class: "navbar-icon" do %>
-    <%= image_tag 'punching' %>
-  <% end %>
-  <a href="#messages" class="navbar-icon">
-    <i class="fa-solid fa-message"></i>
-  </a>
 </div>
