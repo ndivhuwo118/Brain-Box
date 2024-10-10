@@ -10,4 +10,8 @@ class User < ApplicationRecord
   has_many :games_as_opponent, class_name: 'Game', foreign_key: 'opponent_id'
   has_many :messages
   has_one_attached :avatar
+
+  def total_score
+    game_players.sum(:score)
+  end
 end

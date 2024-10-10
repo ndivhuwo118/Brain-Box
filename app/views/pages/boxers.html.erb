@@ -1,0 +1,16 @@
+<h1 class="text-center">All Boxers</h1>
+
+<div class="boxers-container">
+  <% @boxers.each do |boxer| %>
+    <div class="game-card">
+      <div class="game-info boxer">
+      <%= image_tag boxer.avatar, class:"avatar-large" %>
+      <p><%= boxer.nickname %></p>
+      <div class="score">
+        <p id="tiny-score">score</p>
+        <p><%= boxer.total_score %></p>
+      </div>
+      </div>
+    </div>
+  <% end %>
+</div>
