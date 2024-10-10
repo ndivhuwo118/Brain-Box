@@ -5,6 +5,7 @@ class RoundsController < ApplicationController
     @question = @round.question
     @answers = @question.answers
     @game_player = @game.game_players.where(user: current_user)
+    @opponent_player = @game.game_players.where.not(user: current_user).first
     # # selected_answer = Answer.find(params[:answer_id])
 
     # if selected_answer.correct?
@@ -12,6 +13,7 @@ class RoundsController < ApplicationController
     # end
     # next_round = Round.where('id > ?', @round.id).first
     @next_round = @game.rounds.find_by(round_number: @round.round_number + 1)
+
 
     # if next_round
     #   redirect_to game_round_path(@game, next_round)
