@@ -49,12 +49,13 @@
   <a href="#messages" class="navbar-icon">
     <i class="fa-solid fa-message"></i>
   </a>
-
+ <%= image_tag url_for(current_user.avatar),class:'github' %>
   <% if current_user %>
   <%= current_user.nickname %>
   <%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} %>
   <% else %>
   <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+
   <% end %>
 
 </div>
