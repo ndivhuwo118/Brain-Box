@@ -1,0 +1,13 @@
+<h1>Games against <%= @other_user.nickname %></h1>
+<% if @shared_games.any? %>
+  <ul>
+    <% @shared_games.each do |game| %>
+      <li>
+        Game <%= game.id %>:
+        <%= link_to 'View Game', game_path(game) %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No shared games with this user.</p>
+<% end %>

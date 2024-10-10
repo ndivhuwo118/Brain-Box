@@ -1,0 +1,17 @@
+// #lib/adapters/http.js@0.21.4 downloaded from https://ga.jspm.io/npm:axios@0.21.4/lib/adapters/xhr.js
+
+import{_ as e}from"../../_/17e7e1c3.js";import r from"../core/settle.js";import t from"../helpers/cookies.js";import o from"../helpers/buildURL.js";import a from"../core/buildFullPath.js";import n from"../helpers/isURLSameOrigin.js";import{_ as s}from"../../_/b0f8a5eb.js";import"../helpers/isAbsoluteURL.js";import"../helpers/combineURLs.js";var i={};var d=e;var u=["age","authorization","content-length","content-type","etag","expires","from","host","if-modified-since","if-unmodified-since","last-modified","location","max-forwards","proxy-authorization","referer","retry-after","user-agent"];
+/**
+ * Parse headers into an object
+ *
+ * ```
+ * Date: Wed, 27 Aug 2014 08:58:49 GMT
+ * Content-Type: application/json
+ * Connection: keep-alive
+ * Transfer-Encoding: chunked
+ * ```
+ *
+ * @param {String} headers Headers needing to be parsed
+ * @returns {Object} Headers parsed into an object
+ */i=function parseHeaders(e){var r={};var t;var o;var a;if(!e)return r;d.forEach(e.split("\n"),(function parser(e){a=e.indexOf(":");t=d.trim(e.substr(0,a)).toLowerCase();o=d.trim(e.substr(a+1));if(t){if(r[t]&&u.indexOf(t)>=0)return;r[t]="set-cookie"===t?(r[t]?r[t]:[]).concat([o]):r[t]?r[t]+", "+o:o}}));return r};var l=i;var p={};var f=e;var m=r;var c=t;var v=o;var h=a;var R=l;var g=n;var x=s;p=function xhrAdapter(e){return new Promise((function dispatchXhrRequest(r,t){var o=e.data;var a=e.headers;var n=e.responseType;f.isFormData(o)&&delete a["Content-Type"];var s=new XMLHttpRequest;if(e.auth){var i=e.auth.username||"";var d=e.auth.password?unescape(encodeURIComponent(e.auth.password)):"";a.Authorization="Basic "+btoa(i+":"+d)}var u=h(e.baseURL,e.url);s.open(e.method.toUpperCase(),v(u,e.params,e.paramsSerializer),true);s.timeout=e.timeout;function onloadend(){if(s){var o="getAllResponseHeaders"in s?R(s.getAllResponseHeaders()):null;var a=n&&"text"!==n&&"json"!==n?s.response:s.responseText;var i={data:a,status:s.status,statusText:s.statusText,headers:o,config:e,request:s};m(r,t,i);s=null}}"onloadend"in s?s.onloadend=onloadend:s.onreadystatechange=function handleLoad(){s&&4===s.readyState&&(0!==s.status||s.responseURL&&0===s.responseURL.indexOf("file:"))&&setTimeout(onloadend)};s.onabort=function handleAbort(){if(s){t(x("Request aborted",e,"ECONNABORTED",s));s=null}};s.onerror=function handleError(){t(x("Network Error",e,null,s));s=null};s.ontimeout=function handleTimeout(){var r="timeout of "+e.timeout+"ms exceeded";e.timeoutErrorMessage&&(r=e.timeoutErrorMessage);t(x(r,e,e.transitional&&e.transitional.clarifyTimeoutError?"ETIMEDOUT":"ECONNABORTED",s));s=null};if(f.isStandardBrowserEnv()){var l=(e.withCredentials||g(u))&&e.xsrfCookieName?c.read(e.xsrfCookieName):void 0;l&&(a[e.xsrfHeaderName]=l)}"setRequestHeader"in s&&f.forEach(a,(function setRequestHeader(e,r){"undefined"===typeof o&&"content-type"===r.toLowerCase()?delete a[r]:s.setRequestHeader(r,e)}));f.isUndefined(e.withCredentials)||(s.withCredentials=!!e.withCredentials);n&&"json"!==n&&(s.responseType=e.responseType);"function"===typeof e.onDownloadProgress&&s.addEventListener("progress",e.onDownloadProgress);"function"===typeof e.onUploadProgress&&s.upload&&s.upload.addEventListener("progress",e.onUploadProgress);e.cancelToken&&e.cancelToken.promise.then((function onCanceled(e){if(s){s.abort();t(e);s=null}}));o||(o=null);s.send(o)}))};var E=p;export{E as default};
+
