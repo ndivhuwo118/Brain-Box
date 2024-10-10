@@ -27,7 +27,6 @@ class Game < ApplicationRecord
     rounds.order(:round_number).last
   end
 
-
   def current_player
     game_players.find_by(user_id: user.id)
   end

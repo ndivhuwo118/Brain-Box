@@ -50,7 +50,7 @@ class GamesController < ApplicationController
     end
 
     @game.opponent_id = @opponent.id
-
+    # raise
 
     if @game.save
       GamePlayer.create!(game: @game, user: current_user)
@@ -79,7 +79,7 @@ class GamesController < ApplicationController
 
   def final
     @game = Game.find(params[:id])
-    
+
     @winner = @game.winner!
 
   end

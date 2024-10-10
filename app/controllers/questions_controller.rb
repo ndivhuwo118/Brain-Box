@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
     @round = @question.round
     @game = @round.game
 
-    if current_user == @game.current_player.user
+    if current_user == @game.user
       @game_player = @game.current_player
     else
       @game_player = @game.opponent_player
