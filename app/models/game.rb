@@ -31,6 +31,7 @@ class Game < ApplicationRecord
     where(user_id: [user1.id, user2.id], opponent_id: [user1.id, user2.id])
   } 
 
+
   def current_player
     game_players.find_by(user_id: user.id)
   end

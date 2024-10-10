@@ -1,9 +1,15 @@
-<h1 class="text-center round-title">Round <%= @round.round_number %></h1>
 
+<div class="round-header">
+<div class="round-avatar">
+<%= image_tag url_for(@game.game_players.first.user.avatar),class:'github' %>
+<span class="vs"><%= image_tag "versus" %></span>
+<%= image_tag url_for(@game.game_players.second.user.avatar), class: 'github' %></div>
+<h1 class="text-center">Round <%= @round.round_number %></h1>
+</div>
+<div class="all">
 <div class="form-container game-card question-card">
   <% if @question %>
     <p class="question-content"><%= @question.content %></p>
-
     <%= form_with url: submit_answer_question_path(@question) do %>
       <div class="answer-buttons">
         <% @question.answers.each do |answer| %>
@@ -19,6 +25,7 @@
       </div>
     <% end %>
   <% else %>
-    <p class="no-question">No question available.</p>
+
+    <p class="no-question">No question available.</p></div>
   <% end %>
 </div>

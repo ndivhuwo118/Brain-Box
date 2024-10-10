@@ -38,5 +38,7 @@ Rails.application.routes.draw do
     end
   end
   get "boxers", to: "pages#boxers"
+
   get "boxers/:nickname", to: "users#show", as: :nickname
+
 end

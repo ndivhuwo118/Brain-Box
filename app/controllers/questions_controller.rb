@@ -17,6 +17,7 @@ class QuestionsController < ApplicationController
     else
       @game_player = @game.opponent_player
     end
+ 
 
     @game_player.play_count += 1
     selected_answer = Answer.find(params[:answer_id])
