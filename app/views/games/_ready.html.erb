@@ -5,7 +5,7 @@
     <% if game.rounds.any? %>
       <%= link_to "Play", game_round_path(game, game.rounds.first), class: "play-button" %>
     <% else %>
-      <%= image_tag 'warmup', class: 'ready-image' %>
+      <%= image_tag 'warmup.gif', class: 'ready-image' %>
     <% end % %>
   </div>
 </div>
