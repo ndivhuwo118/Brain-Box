@@ -11,7 +11,7 @@
 }
 
 .btn:hover, .button:hover {
-  background-color: #ffcc00;
+
   transform: scale(1.05);
 }
 
@@ -22,25 +22,26 @@
   text-transform: uppercase;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   color: #fff;
-  background-color: #d0021b;
+  background-color: $btn-blue;
   margin-top: 20px;
 }
 
 .submit-btn {
-  background-color: #d0021b;
-  border: 3px solid #ffcc00;
-  box-shadow: 0 8px 20px rgba(255, 204, 0, 0.8);
+  background-color: $btn-blue;
+  border: 3px solid $btn-blue;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: white
 }
 
 .submit-btn:hover {
-  background-color: #ff0000;
-  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+  background-color: black;
 }
 
 .back-btn {
   margin-top: 20px;
   background-color: #ffcc00;
-  border: 2px solid #d0021b;
+  border: 2px solid $btn-blue;
   color: #000;
   text-transform: uppercase;
   transition: background-color 0.3s ease;
@@ -57,16 +58,38 @@
   text-transform: uppercase;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   color: #fff;
-  background-color: #d0021b;
+  background-color: $btn-blue;
 }
 
 .fight-btn {
   background-color: #d0021b;
   border: 3px solid #ffcc00;
-  box-shadow: 0 8px 20px rgba(255, 204, 0, 0.8);
+
 }
 
 .fight-btn:hover {
   background-color: #ff0000;
   box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+}
+
+
+
+.selectable-btn {
+  width: 60%;
+  padding: 10px 20px;
+  background-color: #d0021b;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.selectable-btn:hover {
+  background-color: #975c61;
+}
+
+.hidden-radio:checked + .selectable-btn {
+  background-color: $light-blue;
+  border-color: $light-blue;
+  color: $dark-blue;
 }

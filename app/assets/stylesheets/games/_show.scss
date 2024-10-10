@@ -48,26 +48,6 @@
   color: #ffcc00;
 }
 
-.btn {
-  padding: 2px;
-  font-size: 0.8rem;
-  border-radius: 8px;
-  text-transform: uppercase;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  color: #fff;
-  background-color: #d0021b;
-  margin-top: 20px;
-}
-
-.submit-btn {
-  background-color: #ffcc00;
-}
-
-.submit-btn:hover {
-  background-color: #ff0000;
-  box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
-}
-
 .back-btn {
   margin-top: 20px;
   background-color: #ffcc00;
@@ -114,25 +94,6 @@
   display: none;
 }
 
-.selectable-btn {
-  width: 60%;
-  padding: 10px 20px;
-  background-color: #d0021b;
-  border-radius: 5px;
-  cursor: pointer;
-  color: #fff;
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.selectable-btn:hover {
-  background-color: #975c61;
-}
-
-.hidden-radio:checked + .selectable-btn {
-  background-color: #ffcc00;
-  border-color: #d0021b;
-  color: #d0021b;
-}
 
 .githubsmall{
   border-radius: 100px;
