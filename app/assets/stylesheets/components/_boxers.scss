@@ -2,6 +2,8 @@
   a {
     text-decoration: none;
   }
+  height: calc(100vh - 230px);
+  overflow-y: scroll;
 }
 .boxer {
   padding: 0.5rem;

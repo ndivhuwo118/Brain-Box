@@ -1,81 +1,55 @@
 <h1>Games against <%= @other_user.nickname %></h1>
 <% if @shared_games.any? %>
-
-<div class="game-list">
-  <h2>You haven't thrown a punch</h2>
-  <% @my_games.each do |game| %>
+  <div class="game-list">
+    <h2>You haven't thrown a punch</h2>
     <div class="game-card boxing-card">
-      <div class="game-info">
-        <div class="player">
-
-          <span class="player-email"><%= game.game_players.first.user.nickname %></span>
-          <%= image_tag url_for(game.game_players.first.user.avatar),class:'githubsmall' %>
-          <span class="player-score"><%= game.game_players.first.score %></span>
-        </div>
-
-        <span class="vs">
-          <%= link_to 'Play Now', game_round_path(game, game.rounds.first), class: 'btn play-now-btn', role: 'button' %>
-        </span>
-
-        <div class="player">
-          <span class="player-email"><%= game.game_players.second.user.nickname %></span>
-          <%= image_tag url_for(game.game_players.second.user.avatar),class:'githubsmall' %>
-          <span class="player-score"><%= game.game_players.second.score %></span>
+        <div class="game-info">
+          <h2>Time to start a fight?</h2>
         </div>
       </div>
-    </div>
-  <% end %>
-
-  <h2>Waiting for punch </h2>
-  <% @started_games.each do |game| %>
-
-    <div class="game-card boxing-card">
-      <div class="game-info">
-        <div class="player">
-          <span class="player-email"><%= game.game_players.first.user.nickname %></span>
-          <%= image_tag url_for(game.game_players.first.user.avatar),class:'githubsmall' %>
-          <span class="player-score"><%= game.game_players.first.score %></span>
-        </div>
-
-
-        <span class="vs"><%= image_tag "boxing-gloves.png" %></span>
-
-
-        <div class="player">
-          <span class="player-email"><%= game.game_players.second.user.nickname %></span>
-          <%= image_tag url_for(game.game_players.second.user.avatar),class:'githubsmall' %>
-          <span class="player-score"><%= game.game_players.second.score %></span>
-
+    <% @my_games.each do |game| %>
+      <div class="game-card boxing-card">
+        <div class="game-info">
+          <div class="player">
+            <span class="player-email"><%= game.game_players.first.user.nickname %></span>
+            <%= image_tag url_for(game.game_players.first.user.avatar),class:'githubsmall' %>
+            <span class="player-score"><%= game.game_players.first.score %></span>
+          </div>
+          <span class="vs">
+            <%= link_to 'Play Now', game_round_path(game, game.rounds.first), class: 'btn play-now-btn', role: 'button' %>
+          </span>
+          <div class="player">
+            <span class="player-email"><%= game.game_players.second.user.nickname %></span>
+            <%= image_tag url_for(game.game_players.second.user.avatar),class:'githubsmall' %>
+            <span class="player-score"><%= game.game_players.second.score %></span>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %>
-
-  <h2>Match over</h2>
-
-  <% @complete_games.each do |game| %>
-    <div class="game-card boxing-card">
-      <div class="game-info">
-        <div class="player">
-          <%= image_tag 'belt.png', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
-          <%= image_tag 'ko.png', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
-          <span class="player-email"><%= game.game_players.first.user.nickname %></span>
-          <span class="player-score <%= "winner" if game.game_players.first.score > game.game_players.second.score%>"><%= game.game_players.first.score %></span>
-        </div>
-        <span class="vs"><%= image_tag "boxing-gloves.png" %></span>
-        <div class="player">
-          <%= image_tag 'belt.png', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
-          <%= image_tag 'ko.png', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
-          <span class="player-email"><%= game.game_players.second.user.nickname %></span>
-          <span class="player-score <%= "winner" if game.game_players.first.score < game.game_players.second.score%>"><%= game.game_players.second.score %></span>
+    <% end %>
+    <h2>Match over</h2>
+    <% @complete_games.each do |game| %>
+      <div class="game-card boxing-card">
+        <div class="game-info">
+          <%= link_to game_path(game) , class: "navbar-icon" do %>
+            <div class="player">
+              <%= image_tag 'belt.png', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
+              <%= image_tag 'ko.png', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
+              <span class="player-email"><%= game.game_players.first.user.nickname %></span>
+              <span class="player-score <%= "winner" if game.game_players.first.score > game.game_players.second.score%>"><%= game.game_players.first.score %></span>
+            </div>
+            <span class="vs"><%= image_tag "boxing-gloves.png" %></span>
+            <div class="player">
+              <%= image_tag 'belt.png', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
+              <%= image_tag 'ko.png', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
+              <span class="player-email"><%= game.game_players.second.user.nickname %></span>
+              <span class="player-score <%= "winner" if game.game_players.first.score < game.game_players.second.score%>"><%= game.game_players.second.score %></span>
+            </div>
+          <% end %>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
-
+    <% end %>
+  </div>
 <% else %>
   <h3>No games with this user.</h3>
   <h3>Start one?</h3>
-
 <% end %>
