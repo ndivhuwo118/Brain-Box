@@ -7,6 +7,11 @@
   border-radius: 8px;
   // background-color: #f9f9f9;
   margin-bottom: 10px;
+  color: $dark-blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
 }
 
 
@@ -53,8 +58,8 @@
 
 
 
-.message-bubble {
-  display: inline-block;
+.message {
+
   padding: 10px 15px;
   border-radius: 18px;
   margin-bottom: 10px;
@@ -62,9 +67,7 @@
   word-wrap: break-word;
   font-size: 14px;
 }
-
-
-.sent {
+.message.sent .message-content {
   background-color: #007bff;
   color: white;
   align-self: flex-end;
@@ -73,7 +76,7 @@
 }
 
 
-.received {
+.message.received .message-content {
   background-color: #e1e1e1;
   color: black;
   align-self: flex-start;

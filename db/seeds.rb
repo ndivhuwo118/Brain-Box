@@ -147,6 +147,85 @@ questions_and_answers = {
   ]
 }
 
+# creating games for David and Darian
+
+puts "Getting D & D"
+david = User.find_by(nickname: "Davidjunior1991")
+puts "got #{david.nickname}"
+darian = User.find_by(nickname: "dariancpt")
+puts "got #{darian.nickname}"
+
+puts "creating games for David and Darian"
+
+3.times do
+  user = david
+  opponent = darian
+  winner = [user, opponent].sample
+
+  game = Game.create!(
+    user: user,
+    winner_id: winner.id,
+    opponent_id: opponent.id
+  )
+
+  3.times do |i|
+    Round.create!(game: game, round_number: i + 1)
+  end
+
+  # rounds = Round.left_joins(:question).where(questions: { id: nil })
+  # until rounds.empty?
+
+  #   categories.each do |category_name|
+  #     category = Category.find_by(name: category_name)
+
+  #     next unless category # Skip if the category does not exist
+
+  #     questions_and_answers[category_name].each do |item|
+
+  #       round = rounds.sample # Randomly assign a round that doesn't have a question yet
+  #       next unless round # Skip if there are no rounds
+
+  #       question = Question.create!(
+  #         content: item[:question],
+  #         round: round
+  #       )
+
+  #       # Create the correct answer
+  #       Answer.create!(
+  #         content: item[:correct_answer],
+  #         decoy: false, # Correct answer
+  #         question: question
+  #       )
+
+  #       # Gather incorrect answers
+  #       incorrect_answers = item[:answers].reject { |ans| ans == item[:correct_answer] }
+
+  #       # Ensure there are enough valid incorrect answers
+  #       next if incorrect_answers.length < 3  # Skip if not enough incorrect answers
+
+  #       # Randomly select three unique decoys
+  #       selected_decoys = incorrect_answers.sample(3)
+
+  #       # Create decoy answers
+  #       selected_decoys.each do |decoy_answer|
+  #         # Ensure we're not creating nil content
+  #         next if decoy_answer.nil?
+
+  #         Answer.create!(
+  #           content: decoy_answer,
+  #           decoy: true, # Incorrect answer
+  #           question: question
+  #         )
+  #       end
+  #     end
+  #   end
+  #   rounds = Round.left_joins(:question).where(questions: { id: nil })
+  # end
+
+
+end
+
+
 # Create questions and answers for each category and round
 # Create questions and answers for each category and round
 puts "Creating questions and answers..."
@@ -217,33 +296,46 @@ Game.all.each do |game|
   GamePlayer.create!(
     game: game,
     user: game.user,
-    score: rand(0..3) ,
+    score: rand(0..100) ,
     played: [true, false].sample
   )
   GamePlayer.create!(
     game: game,
     user: game.opponent,
-    score: rand(0..3),
+    score: rand(0..100),
     played: [true, false].sample
   )
 end
 
-# Create player answers based on their game participation
-# puts "Creating player answers..."
-# GamePlayer.all.each do |game_player|
-#   Round.all.sample(1).each do |round|
-#     Question.where(round: round).each do |question|
-#       Answer.where(question: question).sample(1).each do |answer|
-#         PlayersAnswer.create!(
-#           answer: answer,
-#           user: game_player.user,
-#           correct: !answer.decoy, # Check if the answer is correct
-#           round_id: round.id
-#         )
-#       end
-#     end
-#   end
-# end
+puts "completing darian and dave's game"
+
+games = Game.where(user_id: david.id)
+games.each do |game|
+  game.game_players.each do |player|
+    player.update(played: true)
+  end
+  puts "Creating messages between David and Darian"
+
+  Message.create!(user_id: david.id, game_id: game.id, content: "Great game! You really had me on my toes.")
+  puts "message created"
+  Message.create!(user_id: darian.id, game_id: game.id, content: "Haha, thanks! I thought you were going to win that last round.")
+  puts "message created"
+
+  Message.create!(user_id: david.id, game_id: game.id, content: "Yeah, that last move of yours really caught me off guard. How did you think of that?")
+  puts "message created"
+  Message.create!(user_id: darian.id, game_id: game.id, content: "I just took a chance! I noticed you were focusing on defense, so I tried something different.")
+  puts "message created"
+
+  Message.create!(user_id: david.id, game_id: game.id, content: "Smart move! We should play again soon—maybe I'll try a new strategy.")
+  puts "message created"
+  Message.create!(user_id: darian.id, game_id: game.id, content: "Definitely! Let’s do a rematch next week. I’ll be ready!")
+  puts "message created"
+end
+
+
+
+
+
 
 puts "Seeding complete!"
 ENV['SEEDING'] = 'true'
