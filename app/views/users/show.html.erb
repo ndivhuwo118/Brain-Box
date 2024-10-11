@@ -38,7 +38,7 @@
         </div>
 
 
-        <span class="vs"><%= image_tag "boxing-gloves" %></span>
+        <span class="vs"><%= image_tag "boxing-gloves.png" %></span>
 
 
         <div class="player">
@@ -57,15 +57,15 @@
     <div class="game-card boxing-card">
       <div class="game-info">
         <div class="player">
-          <%= image_tag 'belt', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
-          <%= image_tag 'ko', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
+          <%= image_tag 'belt.png', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
+          <%= image_tag 'ko.png', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
           <span class="player-email"><%= game.game_players.first.user.nickname %></span>
           <span class="player-score <%= "winner" if game.game_players.first.score > game.game_players.second.score%>"><%= game.game_players.first.score %></span>
         </div>
         <span class="vs"><%= image_tag "boxing-gloves" %></span>
         <div class="player">
-          <%= image_tag 'belt', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
-          <%= image_tag 'ko', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
+          <%= image_tag 'belt.png', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
+          <%= image_tag 'ko.png', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
           <span class="player-email"><%= game.game_players.second.user.nickname %></span>
           <span class="player-score <%= "winner" if game.game_players.first.score < game.game_players.second.score%>"><%= game.game_players.second.score %></span>
         </div>
