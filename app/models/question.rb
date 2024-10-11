@@ -29,7 +29,7 @@ class Question < ApplicationRecord
     answer1_response = client.chat(parameters: {
       model: "gpt-4",
       messages: [
-        { role: "user", content: "For the question: '#{content}', provide a concise plausable incorrect answer. Do not include any additional text or methods" }
+        { role: "user", content: "For the question: '#{content}', provide a concise plausable incorrect answer. Do not include the question text in the answer or any additional text or methods" }
       ]
     })
 
@@ -38,7 +38,7 @@ class Question < ApplicationRecord
     answer2_response = client.chat(parameters: {
       model: "gpt-4",
       messages: [
-        { role: "user", content: "For the question: '#{content}', provide a concise plausable incorrect answer. Make it different to this incorrect answer: #{answer1}.Do not include any additional text or methods" }
+        { role: "user", content: "For the question: '#{content}', provide a concise plausable incorrect answer. Make it different to this incorrect answer: #{answer1}.Do not include the question text in the answer or any additional text or methods" }
       ]
     })
 
@@ -48,7 +48,7 @@ class Question < ApplicationRecord
     answer4_response = client.chat(parameters: {
       model: "gpt-4",
       messages: [
-        { role: "user", content: "For the question: '#{content}', provide a the correct answer concisely. Do not include any additional text or methods. These are the incorrect answers: #{answer1}, #{answer2}. Provide the correct answer in the same format as the incorrect ones" }
+        { role: "user", content: "For the question: '#{content}', provide a the correct answer concisely. Do not include the question text in the answer or any additional text or methods. These are the incorrect answers: #{answer1}, #{answer2}. Provide the correct answer in the same format as the incorrect ones" }
       ]
     })
 
