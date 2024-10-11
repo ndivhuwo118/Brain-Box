@@ -18,8 +18,8 @@ class Question < ApplicationRecord
 
     client = OpenAI::Client.new
     chatgpt_response = client.chat(parameters: {
-      model: "gpt-4o-mini",
-      messages: [{ role: "user", content: "Give me an interesting quiz question in the category of #{categories.sample.name}. Give me only the text of the question, without any of your own answer like 'Here is a simple question'. Please make a question unique to the previous questions. Here are the other questions: #{round.game.questions_content}"}]
+      model: "gpt-4",
+      messages: [{ role: "user", content: "Give me a concise interesting quiz question in the category of #{categories.sample.name}. Give me only the text of the question, without any of your own answer like 'Here is a simple question'. It should be unique to these previous questions: #{round.game.questions_content}"}]
     })
     new_content = chatgpt_response["choices"][0]["message"]["content"]
 
@@ -27,18 +27,18 @@ class Question < ApplicationRecord
     # return new_content
 
     answer1_response = client.chat(parameters: {
-      model: "gpt-4o-mini",
+      model: "gpt-4",
       messages: [
-        { role: "user", content: "For the question: '#{content}', provide an incorrect answer. Do not include any additional text or methods" }
+        { role: "user", content: "For the question: '#{content}', provide a concise plausable incorrect answer. Do not include any additional text or methods" }
       ]
     })
 
     answer1 = answer1_response["choices"][0]["message"]["content"]
 
     answer2_response = client.chat(parameters: {
-      model: "gpt-4o-mini",
+      model: "gpt-4",
       messages: [
-        { role: "user", content: "For the question: '#{content}', provide an incorrect answer. Make it different to this incorrect answer: #{answer1}.Do not include any additional text or methods" }
+        { role: "user", content: "For the question: '#{content}', provide a concise plausable incorrect answer. Make it different to this incorrect answer: #{answer1}.Do not include any additional text or methods" }
       ]
     })
 
@@ -46,9 +46,9 @@ class Question < ApplicationRecord
 
 
     answer4_response = client.chat(parameters: {
-      model: "gpt-4o-mini",
+      model: "gpt-4",
       messages: [
-        { role: "user", content: "For the question: '#{content}', provide a one correct answer. Do not include any additional text or methods. These are the incorrect answers: #{answer1}, #{answer2}. Provide the correct answer in the same format as the incorrect ones" }
+        { role: "user", content: "For the question: '#{content}', provide a the correct answer concisely. Do not include any additional text or methods. These are the incorrect answers: #{answer1}, #{answer2}. Provide the correct answer in the same format as the incorrect ones" }
       ]
     })
 

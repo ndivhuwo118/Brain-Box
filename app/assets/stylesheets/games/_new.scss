@@ -17,29 +17,12 @@
   box-shadow: 0 8px 40px rgba(255, 71, 87, 0.7);
 }
 
-.form-label {
-  font-weight: bold;
-  font-size: 1.4rem;
-  color: #ff4757;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 6px #000;
-}
 
-.form-control {
-  padding: 14px;
-  font-size: 1.1rem;
-  border-radius: 6px;
-  background-color: #1c1c1c;
-  color: #fff;
-  border: 2px solid #ff4757;
-  transition: border-color 0.3s ease;
-}
 
 .form-control:focus {
-  border-color: #ffcc00;
+
   outline: none;
-  box-shadow: 0 0 12px #ffcc00;
+
 }
 
 .form-control::placeholder {
@@ -71,4 +54,35 @@
   background-image: url('https://images.unsplash.com/photo-1622599511051-16f55a1234d0?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Boxing-themed background */
   box-shadow: 0 0 15px #ff4757;
   color: #fff;
+}
+
+.new-game-container {
+  padding: 3rem;
+
+  .form-control {
+    padding: 14px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    color: $dark-blue;
+    border: 2px solid #ff4757;
+    transition: border-color 0.3s ease;
+  }
+  .form-label {
+    font-weight: bold;
+    font-size: 1.4rem;
+    color: #ff4757;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  label {
+    color: $dark-blue
+  }
+  .pt-0 {
+    color: $dark-blue
+  }
+
+  #challenger-search {
+    color: $dark-blue;
+    width: 80%;
+  }
 }

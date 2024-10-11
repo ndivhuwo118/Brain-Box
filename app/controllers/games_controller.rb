@@ -1,25 +1,29 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show]
-
   def index
-    @games = []
-    @games = Game.joins(:game_players).where(game_players: { user_id: current_user.id })
+    # Fetch all games where the user is either the main user or the opponent
+    @games = Game.where("games.user_id = ? OR games.opponent_id = ?", current_user.id, current_user.id)
 
-    # games that i havent played
-    @my_games = @games.joins(:rounds)
+    # Games that the current user hasn't played
+    @my_games = @games.joins(:game_players)
+                      .where(game_players: { user_id: current_user.id, played: false })
                       .group('games.id, game_players.id')
-                      .having('game_players.played = false')
 
-    # games that i played that hasnt been played by the other game player
-    @started_games = @games.joins(:rounds)
-                           .group('games.id, game_players.id')
-                           .having('game_players.play_count < COUNT(rounds.id)')
+    @started_games = Game.joins(:game_players)
+    .where(game_players: { user_id: current_user.id, played: true })  # Current user has played
+    .where.not(id: Game.joins(:game_players)
+                        .where("game_players.user_id != ?", current_user.id)  # Ensure we are checking for the opponent
+                        .where(game_players: { played: true }))  # Exclude games where the opponent has played
+    .group('games.id')
 
-    # games that i and the other game player have played
-    @complete_games = @games.joins(:rounds)
-                            .group('games.id, game_players.id')
-                            .having('game_players.played = true')
+
+
+
+    # Games that both players have completed (assuming complete? is a model method)
+    @complete_games = @games.select { |game| game.complete? }
   end
+
+
 
   def show
     @game_players = @game.game_players.includes(:user)
@@ -55,7 +59,7 @@ class GamesController < ApplicationController
     if @game.save
       GamePlayer.create!(game: @game, user: current_user)
       GamePlayer.create!(game: @game, user: @opponent)
-      redirect_to loading_game_path(@game), notice: 'Game was successfully created.'
+      redirect_to loading_game_path(@game)
     else
       render :new
     end
@@ -74,12 +78,16 @@ class GamesController < ApplicationController
   def results
     @game = Game.find(params[:id])
     @rounds = @game.rounds.count
-    @score = @game.current_player.score
+    if current_user == @game.current_player.user
+      @score = @game.current_player.score
+    else
+      @score = @game.opponent_player.score
+    end
   end
 
   def final
     @game = Game.find(params[:id])
-    
+
     @winner = @game.winner!
 
   end

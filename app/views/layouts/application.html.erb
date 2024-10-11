@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
+   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
     <title><%= content_for(:title) || "Brain Box" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
+    <%= render 'shared/ios_pwa_links' %>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= yield :head %>
-
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
@@ -16,11 +18,16 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-
   <body>
-  <%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
-
+    <% if current_user %>
+      <div class="logout">
+        <%= link_to destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete} do %>
+          <i class="fa-solid fa-square-arrow-up-right"></i>
+        <% end %>
+      </div>
+    <% end %>
+    <%= render "shared/navbar" %>
+    <%= render "shared/flashes" %>
     <%= yield %>
   </body>
 </html>
