@@ -60,7 +60,7 @@ end
 
 # Create sample games
 puts "Creating games..."
-5.times do
+25.times do
   user = User.all.sample
   opponent = User.where.not(id: user.id).sample
   winner = [user, opponent].sample
