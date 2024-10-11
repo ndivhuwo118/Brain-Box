@@ -1,6 +1,6 @@
 <div
     id="message-<%= message.id %>"
-    class="message message-bubble <%= message.user == user ? 'sent' : 'received' %>"
+    class="message <%= message.user.id == user.id ? 'sent' : 'received' %>"
     data-controller="message"
     data-message-user-id-value="<%= message.user.id %>">
   <small class="message-info">

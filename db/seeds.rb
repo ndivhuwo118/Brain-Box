@@ -2,6 +2,7 @@
 require "open-uri"
 ENV['SEEDING'] = 'true'
 puts "Clearing existing data..."
+Message.destroy_all
 GameCategory.destroy_all
 Category.destroy_all
 Answer.destroy_all
