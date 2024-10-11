@@ -1,16 +1,12 @@
-<%= button_to "Play", play_game_path(@game), class: "btn btn-primary"  %>
-
-<%= turbo_stream_from "game_#{@game.id}_messages" %>
-<div id="messages" class="messages-container">
-  <% @game.messages.each do |message| %>
-
+<div class="game-card p-3">
+  <%= turbo_stream_from "game_#{@game.id}_messages" %>
+  <div id="messages" class="messages-container">
+    <% @game.messages.each do |message| %>
       <%= render "messages/message", message: message, user: current_user %>
-
+    <% end %>
+  </div>
+  <div class="align-form-button"><%= simple_form_for [@game, @message], html: { class: "message-form", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
+    <%= f.input :content, label: false, placeholder: "Message the players", wrapper_html: { class: "flex-grow-1" } %>
+    <%= f.submit "Send", class: "btn btn-primary mb-3" %></div>
   <% end %>
 </div>
-
-
-<%= simple_form_for [@game, @message], html: { class: "message-form", data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" } } do |f| %>
-  <%= f.input :content, label: false, placeholder: "Message the players", wrapper_html: { class: "flex-grow-1" } %>
-  <%= f.submit "Send", class: "btn btn-primary" %>
-<% end %>
