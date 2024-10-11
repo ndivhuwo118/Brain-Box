@@ -48,6 +48,7 @@
   <% @complete_games.each do |game| %>
     <div class="game-card boxing-card">
       <div class="game-info">
+        <%= link_to game_path(game), class: "navbar-icon" do %>
         <div class="player">
           <%= image_tag 'belt', class:"belt" if game.game_players.first.score > game.game_players.second.score%>
           <%= image_tag 'ko', class:"belt" if game.game_players.first.score < game.game_players.second.score%>
@@ -61,6 +62,7 @@
           <span class="player-email"><%= game.game_players.second.user.nickname %></span>
           <span class="player-score <%= "winner" if game.game_players.first.score < game.game_players.second.score%>"><%= game.game_players.second.score %></span>
         </div>
+        <% end %>
       </div>
     </div>
   <% end %>

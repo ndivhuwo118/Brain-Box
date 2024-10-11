@@ -26,8 +26,6 @@ Rails.application.routes.draw do
 
     resources :users, only: [:show]
 
-
-
   end
   resources :questions do
     post "submit_answer", on: :member
